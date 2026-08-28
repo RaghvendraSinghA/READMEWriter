@@ -911,6 +911,42 @@ updated_at
 
 ---
 
+# 13. References :
+# References
+
+1. PostgreSQL Documentation — SQL Language
+   https://www.postgresql.org/docs/current/sql.html
+
+2. PostgreSQL Documentation — Transactions
+   https://www.postgresql.org/docs/current/tutorial-transactions.html
+
+3. PostgreSQL Documentation — Transaction Isolation
+   https://www.postgresql.org/docs/current/transaction-iso.html
+
+4. PostgreSQL Documentation — Concurrency Control
+   https://www.postgresql.org/docs/current/mvcc.html
+
+5. PostgreSQL Documentation — Indexes
+   https://www.postgresql.org/docs/current/indexes.html
+
+6. PostgreSQL Documentation — Explicit Locking
+   https://www.postgresql.org/docs/current/explicit-locking.html
+
+7. PostgreSQL Documentation — CREATE TRIGGER
+   https://www.postgresql.org/docs/current/sql-createtrigger.html
+
+8. PostgreSQL Documentation — Aggregate Functions
+   https://www.postgresql.org/docs/current/functions-aggregate.html
+
+9. AWS — CAP Theorem
+   https://docs.aws.amazon.com/whitepapers/latest/availability-and-beyond-improving-resilience/cap-theorem.html
+
+10. Other most used Resources :
+    - W3SCHOOLS (https://www.w3schools.com/sql/)    
+    - GeeksForGeeks (https://www.geeksforgeeks.org/sql/sql-tutorial/)    
+    - Youtube DBMS | Vishvadeep Gothi (https://youtube.com/playlist?list=PLG9aCp4uE-s0bu-I8fgDXXhVLO4qVROGy&si=Nb7lROaTnJ9v72e0)      
+
+
 
 
 
