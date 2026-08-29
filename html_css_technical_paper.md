@@ -389,18 +389,14 @@ The ID selector has higher specificity than the class and element selectors, so 
 
 ---
 
-# 20. Responsive Web Design
+## 7. Responsive Web Design
 
 Responsive Web Design means designing websites that adapt to different screen sizes and devices.
 
 A responsive website should work well on:
 
 ```text
-Mobile
-Tablet
-Laptop
-Desktop
-Large screens
+Mobile, Tablet, Laptop, Desktop, Large screens
 ```
 
 Responsive design commonly uses:
@@ -426,7 +422,7 @@ This allows the container to shrink on smaller screens while remaining constrain
 
 ---
 
-# 21. CSS Media Queries
+## 8. CSS Media Queries
 
 Media queries allow CSS to apply conditionally based on the environment, such as viewport width or orientation.
 
@@ -454,7 +450,7 @@ Example:
 
 ---
 
-## 21.1 `max-width`
+### 8.1 `max-width`
 
 ```css
 @media (max-width: 600px) {
@@ -466,7 +462,7 @@ Example:
 
 ---
 
-## 21.2 `min-width`
+### 8.2 `min-width`
 
 ```css
 @media (min-width: 768px) {
@@ -478,7 +474,7 @@ Example:
 
 ---
 
-## 21.3 Orientation
+### 8.3 Orientation
 
 ```css
 @media (orientation: landscape) {
@@ -490,7 +486,7 @@ Example:
 
 ---
 
-## 21.4 Multiple Conditions
+### 8.4 Multiple Conditions
 
 ```css
 @media (min-width: 768px) and (max-width: 1200px) {
@@ -512,10 +508,8 @@ Modern media query syntax also supports range expressions:
 ---
 
 
-# 17. Flexbox
-
+## 9. Flexbox
 Flexbox is a one-dimensional CSS layout system.
-
 It is useful for arranging elements along a row or column.
 
 Basic example:
@@ -526,19 +520,9 @@ Basic example:
 }
 ```
 
-HTML:
+Now .container have flexbox property, Next we will see how to change elements inside flexbox.
 
-```html
-<div class="container">
-    <div>One</div>
-    <div>Two</div>
-    <div>Three</div>
-</div>
-```
-
----
-
-## 17.1 `flex-direction`
+### 9.1 flex-direction
 
 ```css
 .container {
@@ -546,6 +530,8 @@ HTML:
     flex-direction: row;
 }
 ```
+
+flex-direction :row ; means elements inside flexbox will be arranged left to right in row (default).
 
 Possible values:
 
@@ -558,9 +544,11 @@ column-reverse
 
 ---
 
-## 17.2 `justify-content`
+### 9.2 justify-content
 
-Controls distribution along the main axis.
+Controls distribution along the main axis. justify-content controls horizontal/main-axis alignment by default.        
+But, if we use flex-direction: column then, main axis will be changed from horizontal(x) to vertical(y) axis.
+
 
 ```css
 .container {
@@ -582,9 +570,10 @@ space-evenly
 
 ---
 
-## 17.3 `align-items`
+### 9.3 align-items
 
-Controls alignment along the cross axis.
+Controls alignment along the cross axis. align-items controls vertical/cross-axis.        
+But, if we use flex-direction: column; then, cross-axis will be changed from vertical(y) to horizontal(x) axis.
 
 ```css
 .container {
@@ -595,7 +584,7 @@ Controls alignment along the cross axis.
 
 ---
 
-## 17.4 `gap`
+### 9.4 gap
 
 Adds spacing between flex items.
 
@@ -608,7 +597,7 @@ Adds spacing between flex items.
 
 ---
 
-## 17.5 `flex-wrap`
+### 9.5 flex-wrap
 
 Allows items to move onto multiple lines.
 
@@ -621,7 +610,7 @@ Allows items to move onto multiple lines.
 
 ---
 
-## 17.6 `flex`
+### 9.6 flex
 
 The `flex` shorthand can represent:
 
@@ -630,49 +619,23 @@ flex-grow
 flex-shrink
 flex-basis
 ```
-
-Example:
-
-```css
-.item {
-    flex: 1;
-}
-```
-
 ---
 
-## 17.7 Common Flexbox Example
-
-```css
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-}
-```
-
-This is particularly useful for navigation bars and headers.
-
----
-
-# 18. CSS Grid
+## 10. CSS Grid
 
 CSS Grid is primarily a two-dimensional layout system.
+It allows developers to control rows and columns.    
 
-It allows developers to control rows and columns.
-
-Basic example:
+Example:
 
 ```css
 .container {
     display: grid;
 }
 ```
-
 ---
 
-## 18.1 Grid Columns
+### 10.1 Grid Columns
 
 ```css
 .container {
@@ -680,12 +643,11 @@ Basic example:
     grid-template-columns: 1fr 1fr 1fr;
 }
 ```
-
 This creates three equal columns.
 
 ---
 
-## 18.2 Grid Rows
+### 10.2 Grid Rows
 
 ```css
 .container {
@@ -693,10 +655,11 @@ This creates three equal columns.
     grid-template-rows: 100px 200px;
 }
 ```
+This creates 2 rows of size 100px and 200px
 
 ---
 
-## 18.3 `gap`
+### 10.3 gap
 
 ```css
 .container {
@@ -704,10 +667,12 @@ This creates three equal columns.
     gap: 20px;
 }
 ```
+This creates a 20px gap between rows and columns.
+
 
 ---
 
-## 18.4 `repeat()`
+### 10.4 repeat()
 
 Instead of:
 
@@ -723,45 +688,21 @@ grid-template-columns: repeat(3, 1fr);
 
 ---
 
-## 18.5 `minmax()`
+### 10.5 minmax()
 
 ```css
 grid-template-columns:
     repeat(auto-fit, minmax(200px, 1fr));
 ```
-
+It means, create as many columns as can fit, where each column is at least 200px wide and can grow    
+to fill available space.
 This can create responsive card layouts.
 
 ---
 
-## 18.6 Grid Example
-
-```css
-.cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-```
-
-HTML:
-
-```html
-<div class="cards">
-
-    <div class="card">Card 1</div>
-    <div class="card">Card 2</div>
-    <div class="card">Card 3</div>
-
-</div>
-```
-
----
-
-# 23. Common HTML Meta Tags
+## 11. Common HTML Meta Tags
 
 Meta tags provide information about an HTML document.
-
 They are placed inside:
 
 ```html
@@ -770,7 +711,7 @@ They are placed inside:
 
 ---
 
-## 23.1 Character Encoding
+### 11.1 Character Encoding
 
 ```html
 <meta charset="UTF-8">
@@ -780,7 +721,7 @@ Specifies the character encoding of the document.
 
 ---
 
-## 23.2 Viewport
+### 11.2 Viewport
 
 ```html
 <meta
@@ -788,12 +729,11 @@ Specifies the character encoding of the document.
     content="width=device-width, initial-scale=1.0"
 >
 ```
-
-This is important for responsive webpages.
+This is important for responsive webpages, It sets the viewport for rendering website.
 
 ---
 
-## 23.3 Description
+### 11.3 Description
 
 ```html
 <meta
@@ -802,11 +742,12 @@ This is important for responsive webpages.
 >
 ```
 
-Provides a description of the page.
+Provides a description of the page,This is for screen-reader like AI tools or screen reader for blind people.    
+Also for SEO.
 
 ---
 
-## 23.4 Robots
+### 11.4 Robots
 
 ```html
 <meta name="robots" content="index, follow">
@@ -816,7 +757,7 @@ Provides instructions to search-engine crawlers.
 
 ---
 
-## 23.5 Theme Color
+### 11.5 Theme Color
 
 ```html
 <meta name="theme-color" content="#ffffff">
@@ -825,9 +766,10 @@ Provides instructions to search-engine crawlers.
 Can influence browser UI theming on supported platforms.
 ---
 
-# 24. CSS Variables
+## 12. CSS Variables
 
-CSS custom properties allow reusable values to be defined.
+CSS custom properties allow reusable values to be defined.    
+Like using this we can store css values in variables and can apply DRY principle.
 
 Example:
 
@@ -851,7 +793,9 @@ Use them with:
 
 ---
 
-## Fallback Values
+### Fallback Values
+
+It is used to set fallback value of CSS variables.
 
 ```css
 color: var(--text-color, black);
@@ -861,7 +805,7 @@ If `--text-color` does not exist, `black` is used.
 
 ---
 
-# 25. Pseudo-classes
+## 13. Pseudo-classes
 
 Pseudo-classes select elements based on their state or position.
 
@@ -875,8 +819,6 @@ Common pseudo-classes:
 :first-child
 :last-child
 :nth-child()
-:checked
-:disabled
 ```
 
 Example:
@@ -905,10 +847,9 @@ li:nth-child(2) {
 
 ---
 
-# 26. Pseudo-elements
+## 14. Pseudo-elements
 
 Pseudo-elements style a specific part of an element or create generated content.
-
 Common pseudo-elements:
 
 ```text
@@ -937,9 +878,10 @@ p::first-letter {
 
 ---
 
-# 27. Transitions
+## 15. Transitions
 
-CSS transitions create smooth changes between states.
+CSS transitions create smooth changes between states of elements.    
+Used with pseudo classes.    
 
 Example:
 
@@ -968,53 +910,61 @@ Shorthand:
 ```css
 transition: all 0.3s ease;
 ```
-
 It is generally better to transition only the properties that need animation rather than using `all` indiscriminately.
 
+
+## 16. Animations
+CSS animations allow elements to change styles over time. They are defined using @keyframes.
+
+```css
+@keyframes move {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(100px);
+    }
+
+    100% {
+        transform: translateX(200px);
+    }
+}
+
+.box {
+    animation: move 2s ease-in-out;
+}
+```
+
+Common animation properties:
+
+```text
+animation-name
+animation-duration
+animation-timing-function
+animation-delay
+animation-iteration-count
+animation-direction
+animation-fill-mode
+```
+
+Animation shorthand:
+
+```css
+.box {
+    animation: move 2s ease-in-out infinite;
+}
+```
+
+* @keyframes -> defines the animation stages.
+* animation-duration -> defines how long the animation takes.
+* animation-iteration-count -> defines how many times it runs.
+* animation-direction -> controls the direction of the animation.
+
 ---
+## References
 
-# 28. Transforms
-
-Transforms visually modify an element.
-
-## Translate
-
-```css
-.box {
-    transform: translateX(20px);
-}
-```
-
-## Scale
-
-```css
-.box {
-    transform: scale(1.2);
-}
-```
-
-## Rotate
-
-```css
-.box {
-    transform: rotate(45deg);
-}
-```
-
-Multiple transformations can be combined:
-
-```css
-.box {
-    transform: translateX(20px) rotate(10deg);
-}
-```
-
----
-
-
-# 36. References
-
-## HTML
+### HTML
 
 1. MDN Web Docs — HTML
    https://developer.mozilla.org/en-US/docs/Web/HTML
@@ -1025,7 +975,7 @@ Multiple transformations can be combined:
 3. web.dev — Learn HTML
    https://web.dev/learn/html/
 
-## CSS
+### CSS
 
 4. MDN Web Docs — CSS
    https://developer.mozilla.org/en-US/docs/Web/CSS
@@ -1039,7 +989,7 @@ Multiple transformations can be combined:
 7. MDN — CSS Specificity
    https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Specificity
 
-## Layout
+### Layout
 
 8. web.dev — CSS Layout
    https://web.dev/learn/css/layout
@@ -1053,7 +1003,7 @@ Multiple transformations can be combined:
 11. MDN — CSS Positioning
     https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Positioning
 
-## Responsive Design
+### Responsive Design
 
 12. MDN — Responsive Web Design
     https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design
@@ -1067,24 +1017,5 @@ Multiple transformations can be combined:
 15. web.dev — Learn Responsive Design
     https://web.dev/learn/design
 
-## Accessibility
 
-16. MDN — Accessibility
-    https://developer.mozilla.org/en-US/docs/Web/Accessibility
 
-17. W3C Web Accessibility Initiative
-    https://www.w3.org/WAI/
-
-18. WAI-ARIA Authoring Practices Guide
-    https://www.w3.org/WAI/ARIA/apg/
-
-## Web Standards
-
-19. W3C — CSS
-    https://www.w3.org/Style/CSS/
-
-20. WHATWG — HTML Standard
-    https://html.spec.whatwg.org/
-
-21. MDN Web Docs
-    https://developer.mozilla.org/
