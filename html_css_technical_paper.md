@@ -966,56 +966,63 @@ Animation shorthand:
 
 ### HTML
 
-1. MDN Web Docs — HTML
-   https://developer.mozilla.org/en-US/docs/Web/HTML
-
-2. WHATWG — HTML Living Standard
-   https://html.spec.whatwg.org/
-
-3. web.dev — Learn HTML
+- web.dev — Learn HTML
    https://web.dev/learn/html/
 
 ### CSS
 
-4. MDN Web Docs — CSS
+- MDN Web Docs — CSS
    https://developer.mozilla.org/en-US/docs/Web/CSS
 
-5. MDN — CSS Box Model
+- MDN — CSS Box Model
    https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Box_model
 
-6. MDN — CSS Selectors
+- MDN — CSS Selectors
    https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Selectors
 
-7. MDN — CSS Specificity
+- MDN — CSS Specificity
    https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Specificity
 
 ### Layout
 
-8. web.dev — CSS Layout
+- web.dev — CSS Layout
    https://web.dev/learn/css/layout
 
-9. web.dev — Flexbox
+- web.dev — Flexbox
    https://web.dev/learn/css/flexbox
 
-10. web.dev — CSS Grid
+- web.dev — CSS Grid
     https://web.dev/learn/css/grid
 
-11. MDN — CSS Positioning
+- MDN — CSS Positioning
     https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Positioning
 
 ### Responsive Design
 
-12. MDN — Responsive Web Design
+- web.dev — Learn Responsive Design
+    https://web.dev/learn/design
+
+- MDN — Responsive Web Design
     https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design
 
-13. MDN — CSS Media Queries
+- MDN — CSS Media Queries
     https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries
 
-14. MDN — Media Queries
+- MDN — Media Queries
     https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Media_queries
 
-15. web.dev — Learn Responsive Design
-    https://web.dev/learn/design
+
+### Extra own topics :
+
+- CSS variables
+    W3Schools (https://www.w3schools.com/css/css3_variables.asp)
+  
+- Pseudo-elements and classes
+    W3Schools (https://www.w3schools.com/css/css_pseudo_elements.asp)
+
+- Transition and Animation
+    Youtube (dave gray) - (https://youtube.com/playlist?list=PL0Zuz27SZ-6Mx9fd9elt80G1bPcySmWit&si=9EnQ5tAUqO1cF4za)
+
 
 
 
