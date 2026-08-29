@@ -1,10 +1,10 @@
-# Technical Paper on HTML/CSS
+# Technical Paper on HTML and CSS
 
 
 ## Introduction
 
-HTML and CSS are the two fundamental technologies used to build and style web pages.
-HTML (HyperText Markup Language) defines the structure and semantic meaning of content.
+HTML and CSS are the two fundamental technologies used to build and style web pages.     
+HTML (HyperText Markup Language) defines the structure and semantic meaning of content.       
 CSS (Cascading Style Sheets) controls the presentation and layout of that content.
 
 
@@ -401,13 +401,10 @@ Mobile, Tablet, Laptop, Desktop, Large screens
 
 Responsive design commonly uses:
 
-* Flexible layouts
 * Relative units
 * Flexbox
 * CSS Grid
 * Media queries
-* Responsive images
-* Flexible typography
 
 For example:
 
@@ -755,6 +752,14 @@ Also for SEO.
 
 Provides instructions to search-engine crawlers.
 
+Web crawlers are automated programs used by search engines to discover and read webpages.   
+The robots meta tag provides instructions about whether a page of website should be indexed 
+in google search engine database for search result and whether page links can be followed     
+to visit and see their contents.
+
+e.g - noindex pages : (payment page, login page)
+    - nofollow links : (payment page link, cart page link)
+
 ---
 
 ### 11.5 Theme Color
@@ -764,6 +769,7 @@ Provides instructions to search-engine crawlers.
 ```
 
 Can influence browser UI theming on supported platforms.
+
 ---
 
 ## 12. CSS Variables
@@ -849,7 +855,9 @@ li:nth-child(2) {
 
 ## 14. Pseudo-elements
 
-Pseudo-elements style a specific part of an element or create generated content.
+Pseudo-elements style a specific part of an element or create generated content after     
+or before of an element.
+
 Common pseudo-elements:
 
 ```text
@@ -857,22 +865,15 @@ Common pseudo-elements:
 ::after
 ::first-letter
 ::first-line
-::selection
+::selection    
 ```
+::selection -: Styles the text when the user selects/highlights it with mouse or touch.
 
 Example:
 
 ```css
 .title::before {
     content: "★ ";
-}
-```
-
-Another example:
-
-```css
-p::first-letter {
-    font-size: 2rem;
 }
 ```
 
