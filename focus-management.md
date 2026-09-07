@@ -1,4 +1,4 @@
-# Focus Management — Answers
+# Focus Management
 
 ## Question 1: What is Deep Work?
 Deep Work is a work which requires full focus and mental power to perform.
