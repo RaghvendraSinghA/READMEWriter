@@ -26,13 +26,17 @@ I can implement deep work principles by:
 
 ## Question 4: What are the dangers of social media, in brief?
 
-Some dangers of excessive social media use are:
-
 - **Distraction:** It interrupts concentration and makes it harder to do deep work.
-- **Reduced attention span:** Constantly switching between short pieces of content can make sustained concentration difficult.
+  
 - **Procrastination:** Social media can become an easy way to avoid difficult, boring, or uncomfortable tasks.
+  
 - **Time wasting:** A few minutes of checking social media can easily turn into a long period of unplanned use.
-- **Reduced productivity:** Frequent notifications and checking habits interrupt important work.
+  
 - **Mental fatigue:** Constant exposure to information and notifications can make the brain feel overloaded.
-- **Comparison:** Seeing other people's carefully presented lives can create unnecessary comparison and dissatisfaction.
-- **Sleep disruption:** Using social media late at night can delay sleep and make it harder to relax.
+  
+- **Reward:** Social media doesn't reward anything, even it makes you irrelavant to job-market like you will
+  not learn new skills which is required in this economy to earn, because you were wasting time on social media.
+
+- **No brain-diffusion mode:** It will take your time in which you should use your brain diffusion mode to become
+  creative and clear on your thoughts and doubts.
+  
