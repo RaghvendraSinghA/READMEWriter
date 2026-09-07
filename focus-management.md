@@ -1,8 +1,7 @@
 # Focus Management — Answers
 
 ## Question 1: What is Deep Work?
-
-Deep Work is a state of focused concentration where you work on a cognitively demanding task without distractions. It allows you to use your mental abilities at their full potential and produce high-quality work in less time.
+    Deep Work is a work which requires complete focus and mental power to perform.
 
 ## Question 2: According to the author, how can you do deep work properly?
 
