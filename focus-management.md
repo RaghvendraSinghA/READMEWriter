@@ -1,19 +1,18 @@
 # Focus Management — Answers
 
 ## Question 1: What is Deep Work?
-    Deep Work is a work which requires full focus and mental power to perform.
+Deep Work is a work which requires full focus and mental power to perform.
 
 ## Question 2: According to the author, how can you do deep work properly?
 
-A few important principles for doing deep work properly are:
+A few important points for doing deep-work are:
 
-1. **Work with complete focus:** Choose one important task and give it your full attention.
-2. **Remove distractions:** Keep away from social media, unnecessary notifications, messages, and other interruptions.
-3. **Set a fixed time and place:** Create a routine where you regularly perform deep work.
-4. **Work for a defined period:** Decide beforehand how long you will focus and work during that period without distractions.
-5. **Take proper breaks:** Allow your brain to rest after periods of intense concentration.
-6. **Set clear goals:** Know exactly what you want to accomplish before starting.
-7. **Create a shutdown routine:** At the end of the workday, stop thinking about work and give your mind time to recover.
+- Remove distractions: Keep away from social media, unnecessary notifications, messages, and other interruptions.     
+                             Try to work in the morning.
+- Set a fixed time and place: Create a routine where you regularly perform deep work.
+- Work for a defined period: Decide beforehand how long you will focus and work during that period without distractions.
+- Set clear goals: Know exactly what you want to accomplish before starting.
+- Create a shutdown routine: At the end of the workday, stop thinking about work and give your mind time to recover.
 
 ## Question 3: How can you implement the principles in your day-to-day life?
 
@@ -22,10 +21,7 @@ I can implement deep work principles by:
 - Setting aside a specific time every day for focused work or study.
 - Keeping my phone away and turning off unnecessary notifications.
 - Working on one task at a time instead of multitasking.
-- Breaking difficult tasks into smaller, manageable goals.
-- Using short breaks to rest my mind instead of using social media continuously.
 - Planning the most important tasks before starting my day.
-- Taking walks, meditating, or sitting quietly to give my brain time to relax.
 - Reviewing my progress at the end of the day and planning the next day's priorities.
 
 ## Question 4: What are the dangers of social media, in brief?
