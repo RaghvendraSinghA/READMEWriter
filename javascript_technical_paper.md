@@ -1701,3 +1701,41 @@ should all be tested.
 
 ---
 
+
+# References
+
+1. MDN Web Docs — JavaScript Guide
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide
+
+2. MDN Web Docs — JavaScript Reference
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
+
+3. MDN — JavaScript Language Overview
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Language_overview
+
+4. MDN — Grammar and Types
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types
+
+5. MDN — Control Flow and Error Handling
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling
+
+6. MDN — Functions
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions
+
+7. MDN — Working with Objects
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects
+
+8. MDN — Indexed Collections (Arrays)
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections
+
+9. MDN — JavaScript Modules
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
+
+10. MDN — JavaScript Debugging and Error Handling
+    https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Debugging_JavaScript
+
+11. Chai and Code (Youtube)
+    https://youtube.com/playlist?list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37&si=tRAy2KpJYF0St0hI
+
+12. W3Schools
+    https://www.w3schools.com/js/
