@@ -2,7 +2,7 @@
 
 ## 1. Different Data Types in JavaScript
 
-JavaScript has **primitive** and **non-primitive** data types.
+JavaScript has primitive and non-primitive data types.
 
 ### Primitive
 
@@ -26,7 +26,7 @@ function greet() {}               // Function
 
 ---
 
-# 2. Scope in JavaScript
+## 2. Scope in JavaScript
 
 Scope determines where a variable can be accessed.
 
@@ -65,7 +65,7 @@ console.log(x); // Error
 
 ---
 
-# 3. let, var, const
+## 3. let, var, const
 
 ```js
 let age = 25;
@@ -78,15 +78,13 @@ var city = "Delhi";
 city = "Mumbai"; // Allowed
 ```
 
-| Keyword | Reassign | Redeclare | Block Scope |
-| ------- | -------- | --------- | ----------- |
-| `let`   | Yes      | No        | Yes         |
-| `const` | No       | No        | Yes         |
-| `var`   | Yes      | Yes       | No          |
+let :-> Follows block-scope, can be re-initialize. Can be declared without value.    
+var :-> Follows functional-scope, can be re-initialize. Can be declared without value.   
+const :-> Follows block-scope, cannot be re-initalize. Cannot be declared without a value.    
 
 ---
 
-# 4. Why We Must Not Use `var`
+## 4. Why We Must Not Use `var`?
 
 `var` is function scoped, can be redeclared, and is hoisted in confusing ways.
 
@@ -96,32 +94,15 @@ if (true) {
 }
 
 console.log(x); // 10
+
+//Even accessible outside of its block-scope.It only follows functional scope.
 ```
-
-With `let`:
-
-```js
-if (true) {
-    let x = 10;
-}
-
-console.log(x); // Error
-```
-
-Prefer:
-
-```js
-const name = "John";
-let age = 25;
-```
-
-Use `const` by default and `let` when reassignment is required.
 
 ---
 
-# 5. Why Global Variables Are Bad
+## 5. Why Global Variables Are Bad
 
-Global variables can be changed from anywhere and can cause unexpected side effects.
+Global variables can be changed from anywhere and can cause unexpected and unknown side effects.
 
 ```js
 let total = 0;
@@ -137,35 +118,14 @@ function reset() {
 
 Both functions can modify the same variable.
 
-Prefer local variables:
-
-```js
-function calculateTotal(prices) {
-    let total = 0;
-
-    for (const price of prices) {
-        total += price;
-    }
-
-    return total;
-}
-```
-
 ---
 
-# 6. Truthy and Falsy Values
+## 6. Truthy and Falsy Values
 
 Falsy values:
 
 ```js
-false
-0
--0
-0n
-""
-null
-undefined
-NaN
+false, 0, -0, 0n, "", null, undefined, NaN
 ```
 
 Everything else is generally truthy.
@@ -174,17 +134,13 @@ Everything else is generally truthy.
 if ("hello") {
     console.log("Runs");
 }
-
-if (0) {
-    console.log("Does not run");
-}
 ```
 
 ---
 
-# 7. Function Hoisting
+## 7. Function Hoisting
 
-Function declarations are hoisted.
+Function declarations are hoisted to top of scope.
 
 ```js
 greet();
@@ -208,7 +164,7 @@ const greet = function () {
 
 ---
 
-# 8. Function Without a Return Statement
+## 8. Function Without a Return Statement
 
 A function without `return` returns `undefined`.
 
@@ -218,13 +174,12 @@ function greet() {
 }
 
 const result = greet();
-
 console.log(result); // undefined
 ```
 
 ---
 
-# 9. Different Ways of Declaring Functions
+## 9. Different Ways of Declaring Functions
 
 ### Function Declaration
 
@@ -250,7 +205,7 @@ const add = (a, b) => {
 };
 ```
 
-Short arrow function:
+### Short arrow function:
 
 ```js
 const add = (a, b) => a + b;
@@ -258,11 +213,9 @@ const add = (a, b) => a + b;
 
 ---
 
-# 10. Pass by Value and Reference
+## 10. Pass by Value and Reference
 
-JavaScript passes arguments **by value**.
-
-For primitives, the value itself is copied.
+JavaScript passes arguments by value for primitives, the value itself is copied.
 
 ```js
 let a = 10;
@@ -294,7 +247,7 @@ console.log(user.name); // Mike
 
 The object itself wasn't copied; the reference value was copied.
 
-Reassigning the parameter does not replace the original object:
+Reassigning the parameter variable does not replace the original object:
 
 ```js
 function change(user) {
@@ -308,9 +261,9 @@ console.log(user.name); // John
 
 ---
 
-# 11. Different Types of `for` Loops
+## 11. Different Types of for-Loops
 
-### Traditional `for`
+### Traditional for-loop
 
 Useful when controlling an index/count.
 
@@ -320,7 +273,7 @@ for (let i = 0; i < 5; i++) {
 }
 ```
 
-### `for...of`
+### for...of
 
 Iterates over values.
 
@@ -332,7 +285,7 @@ for (const number of numbers) {
 }
 ```
 
-### `for...in`
+### for...in
 
 Iterates over object keys.
 
@@ -347,7 +300,6 @@ for (const key in user) {
 }
 ```
 
-Avoid `for...in` for arrays.
 
 ### `forEach`
 
@@ -368,9 +320,20 @@ while (i < 5) {
 }
 ```
 
+### `do-while`
+
+```js
+let i = 0;
+
+do{
+    console.log(i);
+    i++;
+}while(i<5)
+```
+
 ---
 
-# 12. Searching MDN
+## 12. Searching MDN
 
 MDN is the primary reference for JavaScript and Web APIs.
 
@@ -379,8 +342,6 @@ Search examples:
 ```text
 MDN Array.map
 MDN Array.splice
-MDN String.includes
-MDN Object.entries
 ```
 
 Check:
@@ -392,11 +353,11 @@ Check:
 * Browser/Node compatibility
 * Whether the method mutates the original value
 
-[MDN Web Docs](https://developer.mozilla.org/?utm_source=chatgpt.com)
+[MDN Website link](https://developer.mozilla.org/?utm_source=chatgpt.com)
 
 ---
 
-# 13. Popular Array Utility Methods
+## 13. Popular Array Utility Methods
 
 Assume:
 
@@ -404,11 +365,11 @@ Assume:
 const numbers = [1, 2, 3, 4];
 ```
 
-## `pop()`
+### pop()
 
 Removes the last element.
 
-**Mutable**
+(Mutable)
 
 ```js
 numbers.pop();
@@ -416,11 +377,11 @@ numbers.pop();
 console.log(numbers); // [1, 2, 3]
 ```
 
-## `push()`
+### push()
 
 Adds elements to the end.
 
-**Mutable**
+(Mutable)
 
 ```js
 numbers.push(5);
@@ -428,23 +389,23 @@ numbers.push(5);
 console.log(numbers); // [1, 2, 3, 4, 5]
 ```
 
-## `concat()`
+### concat()
 
-Combines arrays.
+Combines arrays and returns new array.
 
-**Immutable**
+(Immutable)
 
 ```js
 const result = numbers.concat([5, 6]);
 
-console.log(result);
+console.log(result); // [1, 2, 3, 4, 5, 6]
 ```
 
-## `slice()`
+### slice()
 
 Returns part of an array.
 
-**Immutable**
+(Immutable)
 
 ```js
 const result = numbers.slice(1, 3);
@@ -452,11 +413,11 @@ const result = numbers.slice(1, 3);
 console.log(result); // [2, 3]
 ```
 
-## `splice()`
+### splice()
 
 Adds/removes elements.
 
-**Mutable**
+(Mutable)
 
 ```js
 numbers.splice(1, 2);
@@ -464,11 +425,11 @@ numbers.splice(1, 2);
 console.log(numbers);
 ```
 
-## `join()`
+### join()
 
 Converts array elements into a string.
 
-**Immutable**
+(Immutable)
 
 ```js
 const result = numbers.join("-");
@@ -476,11 +437,11 @@ const result = numbers.join("-");
 console.log(result); // "1-2-3-4"
 ```
 
-## `flat()`
+### flat()
 
 Flattens nested arrays.
 
-**Immutable**
+(Immutable)
 
 ```js
 const numbers = [1, [2, 3], [4, [5]]];
@@ -491,9 +452,9 @@ console.log(numbers.flat(2));
 
 ---
 
-# 14. Array Finding Methods
+## 14. Array Finding Methods
 
-## `find()`
+### find()
 
 Returns the first matching element.
 
@@ -505,7 +466,7 @@ const result = numbers.find(number => number > 15);
 console.log(result); // 20
 ```
 
-## `indexOf()`
+### indexOf()
 
 Returns the index of a value.
 
@@ -513,7 +474,7 @@ Returns the index of a value.
 numbers.indexOf(20); // 1
 ```
 
-## `includes()`
+### includes()
 
 Checks whether a value exists.
 
@@ -521,7 +482,7 @@ Checks whether a value exists.
 numbers.includes(20); // true
 ```
 
-## `findIndex()`
+### findIndex()
 
 Returns the index of the first matching element.
 
@@ -533,13 +494,15 @@ These methods do not mutate the array.
 
 ---
 
-# 15. Higher-Order Array Methods
+## 15. Higher-Order Array Methods
 
 A higher-order function accepts another function as an argument or returns a function.
 
-## `forEach()`
+### forEach()
 
-**No new array**
+(Immutable)
+
+Doesn't returns new array of results
 
 ```js
 numbers.forEach(number => {
@@ -547,31 +510,31 @@ numbers.forEach(number => {
 });
 ```
 
-## `filter()`
+### filter()
 
-Creates an array containing matching elements.
+Creates and return new array containing elements which have received true value from callback function.
 
-**Immutable**
+(Immutable)
 
 ```js
 const even = numbers.filter(number => number % 2 === 0);
 ```
 
-## `map()`
+### map()
 
-Creates a transformed array.
+Creates and return new transformed array.
 
-**Immutable**
+(Immutable)
 
 ```js
 const doubled = numbers.map(number => number * 2);
 ```
 
-## `reduce()`
+### reduce()
 
 Reduces an array to one value.
 
-**Immutable**
+(Immutable)
 
 ```js
 const total = numbers.reduce(
@@ -580,23 +543,22 @@ const total = numbers.reduce(
 );
 ```
 
-## `sort()`
+### sort()
 
 Sorts the array.
 
-**Mutable**
+(Mutable)
 
 ```js
 numbers.sort((a, b) => a - b);
 ```
 
-Always provide a comparator for numeric sorting.
 
 ---
 
-# 16. Array Method Chaining
+## 16. Array Method Chaining
 
-Methods can be combined.
+In JavaScript methods can be chained.
 
 ```js
 const result = numbers
@@ -605,84 +567,98 @@ const result = numbers
     .reduce((sum, number) => sum + number, 0);
 ```
 
-Flow:
+Direction of execution :
 
 ```text
-filter → map → reduce
+filter -> map -> reduce
 ```
-
-Keep chains readable rather than creating unnecessarily complex chains.
 
 ---
 
-# 17. Popular String Utility Methods
+## 17. Popular String Utility Methods
 
-Strings are **immutable** in JavaScript.
+Strings are (immutable) in JavaScript.
 
 ```js
 const text = "Hello World";
 ```
 
-### `toUpperCase()`
+### toUpperCase()   
+Returns a new string after Capitalizing all letters of string.
 
 ```js
 text.toUpperCase();
 // "HELLO WORLD"
 ```
 
-**Immutable**
+(Immutable)
 
-### `toLowerCase()`
+### toLowerCase()    
+Returns a new string after making a letters to lowercase.
 
 ```js
 text.toLowerCase();
+// "hello world"
 ```
 
-**Immutable**
+(Immutable)
 
-### `includes()`
+### includes()   
+
+Returns true if pattern exist in a string else returns false.   
 
 ```js
 text.includes("World");
 // true
 ```
 
-### `startsWith()`
+### startsWith()   
+
+Returns true if string starts with pattern else returns false.   
 
 ```js
 text.startsWith("Hello");
 // true
 ```
 
-### `endsWith()`
+### endsWith()   
+
+Returns true if string ends with pattern else returns false.   
 
 ```js
 text.endsWith("World");
 // true
 ```
 
-### `indexOf()`
+### indexOf()   
+
+Returns index of pattern in string from where it starts else returns -1.
 
 ```js
 text.indexOf("World");
 // 6
 ```
 
-### `slice()`
+### slice()
 
+Returns new slice of string, end-value is excluded.
 ```js
 text.slice(0, 5);
 // "Hello"
 ```
 
-### `substring()`
+### substring()     
+
+same as slice.
 
 ```js
 text.substring(0, 5);
 // "Hello"
 ```
 
-### `split()`
+### split()        
+
+Splits string based on delimiter inside () and return a array containing splitted parts.
 
 ```js
 const words = text.split(" ");
@@ -691,7 +667,9 @@ console.log(words);
 // ["Hello", "World"]
 ```
 
-### `trim()`
+### trim()    
+
+Removes white-spaces from start and end of string.  
 
 ```js
 const name = "  John  ";
@@ -704,7 +682,7 @@ All of these create/return values without modifying the original string.
 
 ---
 
-# 18. Popular Object Utility Methods
+## 18. Popular Object Utility Methods
 
 Assume:
 
@@ -715,21 +693,23 @@ const user = {
 };
 ```
 
-### `Object.keys()`
+### Object.keys()
 
 ```js
 Object.keys(user);
 // ["name", "age"]
 ```
 
-### `Object.values()`
+### Object.values()
 
 ```js
 Object.values(user);
 // ["John", 25]
 ```
 
-### `Object.entries()`
+### Object.entries()   
+
+Return both key-value of object in an array.   
 
 ```js
 Object.entries(user);
@@ -738,17 +718,19 @@ Object.entries(user);
 
 These do not mutate the object.
 
-### `Object.assign()`
+### Object.assign()
 
-**Can mutate the target object**
+(Can mutate the target object)
 
 ```js
 Object.assign(user, {
     city: "Delhi"
 });
+
+//This will add city property in user object instead of over-writing the user object.
 ```
 
-Safer copy:
+For copy:
 
 ```js
 const copy = Object.assign({}, user);
@@ -760,7 +742,7 @@ const copy = Object.assign({}, user);
 const copy = { ...user };
 ```
 
-### `Object.fromEntries()`
+### Object.fromEntries()
 
 ```js
 const entries = [
@@ -773,9 +755,9 @@ const user = Object.fromEntries(entries);
 
 ---
 
-# 19. When to Use `forEach`, `map`, `filter`, `reduce`
+## 19. When to Use forEach, map, filter, reduce
 
-### `forEach`
+### forEach
 
 Use when you simply want to perform an action.
 
@@ -785,7 +767,7 @@ users.forEach(user => {
 });
 ```
 
-### `map`
+### map
 
 Use when you want a transformed array.
 
@@ -793,7 +775,7 @@ Use when you want a transformed array.
 const names = users.map(user => user.name);
 ```
 
-### `filter`
+### filter
 
 Use when you want selected elements.
 
@@ -801,7 +783,7 @@ Use when you want selected elements.
 const adults = users.filter(user => user.age >= 18);
 ```
 
-### `reduce`
+### reduce
 
 Use when converting an array into one result.
 
@@ -812,18 +794,9 @@ const total = prices.reduce(
 );
 ```
 
-Mental model:
-
-```text
-forEach → do something
-map     → transform
-filter  → select
-reduce  → combine
-```
-
 ---
 
-# 20. Mutable vs Immutable Methods
+## 20. Mutable vs Immutable Methods
 
 ### Mutable
 
@@ -874,9 +847,9 @@ console.log(numbers); // [1, 2, 3]
 
 ---
 
-# 21. Error Handling — `try...catch`
+## 21. Error Handling — try...catch
 
-Use `try...catch` to handle runtime errors.
+Use try...catch to handle runtime errors.
 
 ```js
 try {
@@ -890,7 +863,7 @@ The program can handle the error instead of unexpectedly terminating.
 
 ---
 
-# 22. Throwing Errors
+## 22. Throwing Errors
 
 ```js
 function withdraw(balance, amount) {
@@ -902,7 +875,7 @@ function withdraw(balance, amount) {
 }
 ```
 
-Handle it:
+Handle by:
 
 ```js
 try {
@@ -914,7 +887,7 @@ try {
 
 ---
 
-# 23. `throw new Error()` vs `throw "message"`
+## 23. throw new Error() vs throw "message"
 
 Prefer:
 
@@ -948,9 +921,11 @@ try {
 }
 ```
 
+While throw "message" will throw only message which is mostly useless in debugging.
+
 ---
 
-# 24. Reading Error Messages and Stack Traces
+## 24. Reading Error Messages and Stack Traces
 
 Example:
 
@@ -963,47 +938,32 @@ TypeError: user.getName is not a function
 Read it from the top:
 
 ```text
-Error type → TypeError
-Message    → user.getName is not a function
-File       → user.js
-Line       → 10
-Column     → 15
+Error type -> TypeError
+Message    -> user.getName is not a function
+File       -> user.js
+Line       -> 10
+Column     -> 15
 ```
 
 Then trace the call chain:
 
 ```text
 start()
-  ↓
+  to
 login()
-  ↓
+  to
 user.getName()
-  ↓
+  to
 ERROR
-```
-
-### Daily practice
-
-For 2 weeks:
-
-```text
-1. Create a small bug.
-2. Run the program.
-3. Read the error.
-4. Find the file and line.
-5. Trace the stack.
-6. Explain why it happened.
-7. Fix it.
-8. Run again.
 ```
 
 Do not immediately search for the solution. First understand the stack trace.
 
 ---
 
-# 25. Importance of the `catch` Block
+## 25. Importance of the catch Block
 
-`catch` gives us access to the error.
+catch gives us access to the error.
 
 ```js
 try {
@@ -1022,10 +982,12 @@ try {
 ```
 
 the error can propagate to the caller.
+If an error happens, JavaScript looks for a catch. If it finds one, the error is handled.     
+If it doesn't find one, the error becomes uncaught and the program may stop.
 
 ---
 
-# 26. Spread Operator
+## 26. Spread Operator
 
 Spread expands iterable/object values.
 
@@ -1065,7 +1027,7 @@ Math.max(...numbers);
 
 ---
 
-# 27. Template Literals
+## 27. Template Literals
 
 Use backticks for strings containing variables or expressions.
 
@@ -1087,7 +1049,7 @@ Welcome!
 
 ---
 
-# 28. Default Parameters
+## 28. Default Parameters
 
 Provide a default value when an argument is `undefined`.
 
@@ -1105,7 +1067,7 @@ greet("John");
 
 ---
 
-# 29. Destructuring
+## 29. Destructuring
 
 Extract values from arrays or objects.
 
@@ -1140,9 +1102,10 @@ greet({ name: "John" });
 
 ---
 
-# 30. Closures
+## 30. Closures
 
-A closure occurs when an inner function remembers variables from its outer function.
+A closure occurs when an inner function remembers variables from its outer function    
+even when outer function is finished executing and removed from call-stack.
 
 ```js
 function counter() {
@@ -1161,11 +1124,11 @@ console.log(increment()); // 2
 console.log(increment()); // 3
 ```
 
-The inner function still has access to `count`.
+The inner function still has access to count.
 
 ---
 
-# 31. Arrow Functions vs Regular Functions
+## 31. Arrow Functions vs Regular Functions
 
 ### Syntax
 
@@ -1177,27 +1140,26 @@ function add(a, b) {
 const add = (a, b) => a + b;
 ```
 
-### `this`
+### this
 
 Regular functions get `this` based on how they are called.
 
-Arrow functions don't create their own `this`; they use the surrounding `this`.
+Arrow functions don't create their own `this`; they use the surrounding `this`.   
+Wherever current `this` object is pointing.
 
 ```js
 const user = {
     name: "John",
 
     regular() {
-        console.log(this.name);
+        console.log(this.name);    //"John"
     },
 
     arrow: () => {
-        console.log(this.name);
+        console.log(this.name);    //undefined
     }
 };
 ```
-
-For object methods, prefer regular method syntax when you need `this`.
 
 ### Constructor
 
@@ -1215,9 +1177,10 @@ Arrow functions cannot be constructors.
 
 ---
 
-# 32. `===` vs `==`
+## 32. === vs ==
 
-`===` checks value **and type**.
+=== checks value and type. Object are always false, they can't be compared with equality   
+    operators.
 
 ```js
 5 === "5";
@@ -1241,9 +1204,9 @@ because it avoids unexpected type conversions.
 
 ---
 
-# 33. Why `value === undefined` Is Better Than `!value`
+## 33. Why value === undefined Is Better Than !value
 
-`!value` also matches other falsy values.
+!value also matches other falsy values.
 
 ```js
 const value = 0;
@@ -1253,23 +1216,14 @@ if (!value) {
 }
 ```
 
-But `0` is not undefined.
+But `0` is not undefined.This will also happen for false as value.
 
-If we specifically want to check for undefined:
-
-```js
-if (value === undefined) {
-    console.log("Value is undefined");
-}
-```
-
-This clearly expresses the intention.
 
 ---
 
-# 34. `null` vs `undefined`
+## 34. null vs undefined
 
-### `undefined`
+### undefined
 
 Usually means a value has not been assigned.
 
@@ -1280,26 +1234,20 @@ console.log(value);
 // undefined
 ```
 
-### `null`
+### null
 
 Usually means an intentional absence of a value.
 
-```js
-let user = null;
-```
-
-Comparison:
-
-```js
-undefined === null;
-// false
-```
-
 ---
 
-# 35. Modules — `require` and `module.exports`
+## 35. Modules — require and module.exports
 
-### Export
+Modules help separate code into reusable files.     
+
+require is used for importing and module.exports is used for exporting code   
+from a file.   
+
+### module.exports
 
 `math.js`
 
@@ -1313,7 +1261,7 @@ module.exports = {
 };
 ```
 
-### Import
+### require
 
 `app.js`
 
@@ -1323,25 +1271,12 @@ const { add } = require("./math");
 console.log(add(2, 3));
 ```
 
-Another form:
-
-```js
-module.exports = add;
-```
-
-Then:
-
-```js
-const add = require("./math");
-```
-
-Modules help separate code into reusable files.
 
 ---
 
-# 36. Console Methods
+## 36. Console Methods
 
-### `console.log()`
+### console.log()
 
 General information.
 
@@ -1349,7 +1284,7 @@ General information.
 console.log("Hello");
 ```
 
-### `console.error()`
+### console.error()
 
 Errors.
 
@@ -1357,7 +1292,7 @@ Errors.
 console.error("Something failed");
 ```
 
-### `console.warn()`
+### console.warn()
 
 Warnings.
 
@@ -1365,7 +1300,7 @@ Warnings.
 console.warn("Deprecated method");
 ```
 
-### `console.info()`
+### console.info()
 
 Information.
 
@@ -1373,7 +1308,7 @@ Information.
 console.info("Server started");
 ```
 
-### `console.table()`
+### console.table()
 
 Useful for arrays/objects.
 
@@ -1384,7 +1319,7 @@ console.table([
 ]);
 ```
 
-### `console.dir()`
+### console.dir()
 
 Useful for inspecting objects.
 
@@ -1392,7 +1327,7 @@ Useful for inspecting objects.
 console.dir(user);
 ```
 
-### `console.time()` / `console.timeEnd()`
+### console.time() / console.timeEnd()
 
 Measure execution time.
 
@@ -1406,9 +1341,11 @@ console.timeEnd("loop");
 
 ---
 
-# 37. JavaScript Best Practices
+## 37. JavaScript Best Practices
 
 ### Indentation
+
+4 spaces Indentation for cleaner-code.
 
 ```js
 if (age >= 18) {
@@ -1444,7 +1381,7 @@ Good:
 for (const user of users) {}
 ```
 
-### Prefer `const`
+### Prefer const
 
 ```js
 const name = "John";
@@ -1519,7 +1456,7 @@ function calculateTotal(items) {
 
 ---
 
-# 38. Passing Functions to Other Functions
+## 38. Passing Functions to Other Functions
 
 Functions can be passed as values.
 
@@ -1559,7 +1496,7 @@ because `greet()` executes immediately.
 
 ---
 
-# 39. Named vs Anonymous Functions
+## 39. Named vs Anonymous Functions
 
 ### Named
 
@@ -1601,7 +1538,7 @@ numbers.forEach(number => {
 
 ---
 
-# 40. Variable Number of Arguments
+## 40. Variable Number of Arguments
 
 Use rest parameters.
 
@@ -1633,25 +1570,25 @@ show(10, 20, 30, 40);
 
 ---
 
-# 41. Debugging Strategies
+## 41. Debugging Strategies
 
-## 1. Read the Error First
+### 1. Read the Error First
 
 Do not immediately change code.
 
 ```text
 Error type
-↓
+    then
 Error message
-↓
+    then
 File
-↓
+    then
 Line
-↓
+    then
 Call stack
 ```
 
-## 2. Reproduce the Bug
+### 2. Reproduce the Bug
 
 Create the smallest input that causes the problem.
 
@@ -1660,14 +1597,14 @@ const result = calculateTotal([]);
 console.log(result);
 ```
 
-## 3. Use `console.log`
+### 3. Use `console.log`
 
 ```js
 console.log("input:", input);
 console.log("result:", result);
 ```
 
-## 4. Inspect Types
+### 4. Inspect Types
 
 ```js
 console.log(typeof value);
@@ -1680,7 +1617,7 @@ Especially useful for:
 10   // number
 ```
 
-## 5. Use Breakpoints
+### 5. Use Breakpoints
 
 Pause execution and inspect:
 
@@ -1691,7 +1628,7 @@ scope
 values
 ```
 
-## 6. Check Assumptions
+### 6. Check Assumptions
 
 Instead of assuming:
 
@@ -1705,17 +1642,17 @@ inspect:
 console.log(user);
 ```
 
-## 7. Trace Data Flow
+### 7. Trace Data Flow
 
 ```text
 input
-  ↓
+  then
 validation
-  ↓
+  then
 transformation
-  ↓
+  then
 calculation
-  ↓
+  then
 output
 ```
 
@@ -1739,11 +1676,11 @@ hypothesis → one change → run → observe
 
 ```text
 app.js
-  ↓
+  to
 service.js
-  ↓
+  to
 calculator.js
-  ↓
+  to
 ERROR
 ```
 
@@ -1764,50 +1701,3 @@ should all be tested.
 
 ---
 
-# Quick Revision
-
-```text
-const          → default variable choice
-let            → reassignment required
-var            → avoid
-===            → strict comparison
-==             → type coercion
-undefined      → value not assigned
-null           → intentional absence
-map()          → transform
-filter()       → select
-reduce()       → combine
-forEach()      → perform an action
-for...of       → iterate values
-for...in       → iterate object keys
-push/pop       → mutable
-splice/sort    → mutable
-slice/map      → immutable
-...            → spread/rest
-`${value}`     → template literal
-try/catch      → handle errors
-throw new Error→ create proper error
-require        → import CommonJS module
-module.exports → export CommonJS module
-```
-
-# Daily Practice
-
-For debugging practice, spend **2 weeks** creating and fixing small JavaScript bugs.
-
-Each day:
-
-```text
-1. Write a small program.
-2. Introduce one bug.
-3. Run it.
-4. Read the complete error message.
-5. Locate the file and line.
-6. Read the stack trace.
-7. Explain the root cause.
-8. Fix it.
-9. Test the fix.
-10. Repeat with another bug.
-```
-
-The goal is not just to fix errors, but to become comfortable **reading errors and tracing how execution reached the failure**.
