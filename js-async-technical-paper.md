@@ -395,6 +395,7 @@ Without error handling, failures can become unhandled rejections or crash the ap
 ```js
 function delay(ms) {
     return new Promise(resolve => {
+        console.log("inside promise")
         setTimeout(resolve, ms);
     });
 }
@@ -409,11 +410,16 @@ delay(1000).then(() => {
 #### Promisifying `fs.readFile`
 
 ```js
-const fs = require("fs").promises;
-
-async function readFile() {
-    const data = await fs.readFile("data.txt", "utf8");
-    console.log(data);
+function readFilePromise(path) {
+    return new Promise((resolve, reject) => {
+        fs.readFile(path, "utf8", (error, data) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(data);
+            }
+        });
+    });
 }
 ```
 
@@ -501,8 +507,35 @@ Promise.race([p1, p2, p3])
 ---
 
 ```text
-all         → all must succeed
-allSettled  → everyone reports
-any         → first success
-race        → first result
+all         --> all must succeed
+allSettled  --> everyone reports
+any         --> first success
+race        --> first result
 ```
+
+
+
+### REFERENCES:
+
+## References
+
+- MDN Web Docs — JavaScript Promises  
+  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
+
+- MDN Web Docs — Promise  
+  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+
+- MDN Web Docs — Promise.all()  
+  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
+
+- MDN Web Docs — Promise.race()  
+  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race
+
+- MDN Web Docs — Asynchronous JavaScript  
+  https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Async_JS
+
+- Node.js Documentation — File System  
+  https://nodejs.org/api/fs.html
+
+- ChaiWithCode (Youtube)
+  https://youtube.com/playlist?list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37&si=X8eLrbzJGHupYXeE
