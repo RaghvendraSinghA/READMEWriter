@@ -1,0 +1,1146 @@
+Claude
+
+
+Session —> when claude code starts or when we visit claude.ai website.
+
+guardrails —>safety boundaries that prevent people.
+
+claude —debug —> starts claude with debug logging enabled
+
+claude --debug-file ./debug.log	Writes debug logs to a specified file.
+
+/doctor	Checks Claude Code installation and configuration health.
+
+claude doctor	Runs installation diagnostics from the terminal without starting a session.
+
+
+
+
+uv —> uv is a fast Python package and project manager, not a Claude Code permission mode, plugin, or MCP protocol.
+
+✅ uv lets you use mostly the same commands to manage and run Python projects on Windows and macOS.
+For example, these commands work on both:
+uv init my-project
+cd my-project
+uv add requests
+uv run main.py
+
+
+strictKnownMarketPlace:[],  inside managed-setting.json can be use to give marketplace from where skills can be installed. source- github, source-npm
+
+
+Generative AI—> Can generate new output after analyzing existing documents. It doesn’t only do analyze and show existing result or do just basic predefined calculation.It can create new content.It can even use new generated output to train itself. It doesn’t only read pre-written answer from database, it also generates new text related to answer.
+It can genreate wrong words and also while creating answers and putting pieaces of word it can go wrong known as hallucination.
+
+Gen AI is non deterministic—> It can give different output on same question, using temperature we fix this.
+
+
+CLAUDE.md file loads in every new conversation while SKILLS.md file runs when a exclusive repeated task comes like ppt generation or javascript code generations.
+
+/init is a Claude Code command that scans your project and creates a starter CLAUDE.md file for it. You run it by typing /init at the Claude Code prompt inside your project folder.
+
+
+The Agent SDK: Claude Code inside your own app
+The last step on the spectrum is the Agent SDK. This gets you a library that embeds Claude Code inside your own TypeScript or Python applications.
+
+
+
+
+
+
+
+
+—Claude 101
+
+
+—> Model Context Protocol (MCP), The Model Context Protocol (MCP) powers connectors.
+
+MCP (Model Context Protocol)
+* An open standard that defines how an AI app talks to outside tools and data.
+* Anyone can build an MCP server that exposes tools such as “search tickets,” “read a file,” or “create an event.”
+* Developers work with it directly: they write servers, configure them (for example claude mcp in Claude Code), and handle authentication themselves.
+
+Connectors are ready-made MCP servers in Claude given by claude like email MCP connector let u connect to email.
+Correction—>MCP servers are maintained by existing application companies through which claude connect to them. They maintain the mcp api.
+
+MCP servers help claude to connect with other exisiting apps and data.
+
+MCP isn’t how Claude reaches its models. It connects Claude to outside tools and data, not to the language model itself.It uses claude API.
+
+—> claude tag is for slack to claude connection
+
+
+—> Tone is how Claude sounds in its replies: formal or casual, brief or detailed, warm or businesslike.
+
+—> artifacts are generated output. They doesn’t get burried in conversation chats. for premium users there is tab for artifacts, you can even edit artifacts.
+For free users it created in tab inside a chat.
+	
+	 "Create this as an artifact." specially telling claud to create this output as artifact.
+
+You can share it with people, they can view and edit it.
+
+-Claude Design creates visual work — image, landing pages, one-pagers, product mockups, interface prototypes. 
+
+-Claude Slides creates presentations. Share the notes, report, or conversation you already have.
+ 
+-Claude Docs creates living documents — rich-text pages you and Claude write together. 
+
+
+
+—> RAG, Ai learn from extrenal document provided by user instead of what it have learned in training.
+(Retrieval-Augmented Generation). In conflict Ai gives more weight to documents of user than it own knowledge of training.
+
+—>const context = [
+  { role: "system", content: "You are a helpful assistant." },
+  { role: "user", content: "Hello" },
+  { role: "assistant", content: "Hi! How can I help?" }
+];
+
+
+
+—> claude code can run to your repository even if u have turned off ur laptop.
+
+
+—> Enterprise person as Admin creates one account (with enterprise or team plan) then admin setup billing members allowed, upto 150 members are allowrd, and then they create a Project in claude with all the documents of projects.
+
+	(On free plan u will not able to see share project option) 
+
+—> In research mode, claude does multiple search like even 100 of searches on different sources, whole in normal mode, it only makes 1 web 
+search
+
+	When you enable Research, you're activating an agentic, multi-step process that goes far beyond a simple web search. Claude autonomously decides what to search next based on what it has already found, pursuing leads and filling gaps without you needing to direct each step. In short claude decide each steps automatically.
+Also, claude provides citations.
+
+
+—> If too generic answer then add information about your role, audience and constraints(rules) in you prompt.
+
+—> For high stakes works always verify claude source and be double sure and read the source once.
+
+
+—> evals or eval or evaluate means take a small sample of input which output u know and ask claude to do the task and if output of claude match with your output then u r good to go.
+
+	Even u can take 3-5 small sample examples from web.
+
+	e.g. generate a 10 lines of dataset by ur own or any AI agent.
+
+	This is important when u r doing unknown task, or doing very high stake work because sometimes claude generates bogus output.
+
+	
+
+
+
+—> Projects in claude. (shared chats)
+	Project is a container of chats or a workspace which stores  context for a particular task for a long term mostly heavy tasks in which we can store our chats history for future references and files as context. We can also share project with people.
+This is used for collaborating with people on a task or company task. 
+
+- you can set the project instruction means context for claude. It internally use RAG.
+- you can even give special files for projects through which claude can refer.
+- rarely chat limits.
+- When files folder or context is 100% used, claude summarize them and creates space for new files in project.
+- admin can set the permission of other users.
+
+- project chats also takes space, project context doesn’t refer to users personal chats if “search and reference past chat” is off.
+
+Q & A working in a team.
+
+Are chats in a project public? No. Chats within a project are not shared by default. Even if a project is public to your organization, your chats in it stay private and inaccessible to other members unless you manually share them. All messages sent after you share a chat also stay private by default.
+What do other members see? When you share a project with someone, they get access to its knowledge and instructions and can chat inside it. “Can use” members can see project contents, knowledge, and instructions, and chat within the project, but can’t edit it. “Can edit” members can also change the instructions and knowledge. They don’t see your conversations.
+Are chats part of the project context? No. Context is not shared across chats within a project unless the information is added to the project knowledge base. One chat in a project doesn’t see another chat’s messages. What every chat in the project does get is the project’s files and instructions.
+Two things to keep in mind:
+* Anything you add to the project knowledge or instructions is visible to everyone the project is shared with, so avoid putting private information there.
+* Project sharing is for Team and Enterprise plans. On your free plan, this project is just yours.
+
+
+
+—> Skills are folder of instruction. Each file of skills folder contains
+	A checklist of instruction before generating output to a specialized repeated task. e.g. generate excell, ppt, code formatting etc.
+
+skills folder can contain files in whom there a some predefined tasks are mentioned which should be followed before each specialized repeated output generation, like text, coding-formating, file template, file layout, file ui colors.
+
+skills/
+  js-files/
+    SKILL.md
+  powerpoint/
+    SKILL.md
+  excel/
+    SKILL.md
+
+
+
+skills file for js
+
+SKILL.md
+---
+name: js-coding
+description: Use when writing, editing, or reviewing JavaScript (.js) files, including Node scripts and browser code. Applies our code style, structure, and testing rules.
+---
+
+# JavaScript coding rules
+
+## Style
+- Use ES modules (`import` / `export`), not `require`.
+- Use `const` by default, `let` only when reassigning, never `var`.
+- Use `async/await` instead of `.then()` chains.
+- Names: `camelCase` for variables and functions, `PascalCase` for classes, `UPPER_SNAKE` for constants.
+- 2-space indent, semicolons, single quotes.
+
+## Structure
+- One main responsibility per file. Keep functions under about 30 lines.
+- Put reusable helpers in `utils/`, not inside feature files.
+- Add a short comment above each function saying what it does.
+
+## Error handling
+- Wrap async calls in `try/catch` and throw errors with clear messages.
+- Never leave an empty `catch` block.
+
+## Testing
+- Add a test file next to each module (`parser.js` -> `parser.test.js`).
+- Run `npm test` before finishing.
+
+## Example
+
+Good:
+```js
+export async function getUser(id) {
+  try {
+    const res = await fetch(`/api/users/${id}`);
+    return await res.json();
+  } catch (err) {
+    throw new Error(`Could not load user ${id}: ${err.message}`);
+  }
+}
+```
+
+Avoid:
+```js
+var getUser = function(id) { return fetch('/api/users/' + id).then(r => r.json()) }
+```
+
+
+1.Anthropic Skills are created and maintained by Anthropic. default skill like excell, ppt and coding file generations format.
+2.Custom Skills are ones you or your organization create for specialized workflows and domain-specific tasks.
+
+
+Beware because it can inject code scripts.
+
+You can also create custom skills using claude chatbox while working with claude.
+
+
+
+
+
+—> Connectors and MCP.
+
+—>Using MCP interface we can connect claude to multiple applications and then it can collaborate with us. claude web interface and claud desktop app.
+
+	2 connectors. claude to cloud applications like claude to google-drive, notion, slack, jira and other is claude to local like IDE or ur local desktop apps.
+
+
+* Web: Cloud services and applications (Gmail, Notion, Slack, Asana, Linear, Stripe, and many more)
+* Desktop extensions: Local tools that run on your computer through the Claude Desktop app
+
+
+
+—Claude code 101
+
+-> Claud app is an application which can access files and folders of computers directly. We use it avoid copy things and then pasting to cluade.ai website. Its like stand alone application.
+
+-> Claude agent is an extension app of claude which runs in a existing environment. Like VsCode, M365, slack etc. It is used to integrate claude with other exisiting stand alone applications.It can have all permission of yours in that environment and tools of that environment and can read, edit files.
+
+
+Agentic loop—>
+
+An agentic loop is a repeated cycle of reasoning, tool execution, observation, and decision-making that allows an AI agent to work toward a goal autonomously within defined limits. Claude run in agentic loop.
+
+Example: You ask Claude Code, “Fix the failing tests in my Django project.”
+1. Claude examines the relevant files.
+2. Claude identifies a possible problem.
+3. Claude edits the code using its tools.
+4. Claude runs the tests in the terminal.
+5. Claude reads the test results.
+6. If tests still fail, Claude investigates and tries again.
+7. When it reaches a stopping condition, it reports the outcome. 
+Its simillar to running APi call but, Api call executes once while AI can run in loop works on same task untill result is satisfactory.
+
+Prompt —> Gather context —> Take action —> verify—> Done.
+
+It can goto gather context from verify if result is not correct and it can go in loop.
+
+Claude internally uses tools like web search tool, file search tool.
+
+/context window
+
+
+Permissions—>
+
+* Approval mode: Claude asks permission each time it wants to edit a file or run a command.
+* Auto-accept mode: File edits are automatically approved, but commands still require your permission.
+ .     Plan mode takes your prompt and uses read-only tools to 			analyze your codebase and research your
+
+
+SHIFT+Tab to switch to permissions.
+
+
+Quick tip: If you find Claude keeps running into the same issues, ask it to save the solution to its CLAUDE.md file.You can also store important info in ur CLAUDE.md file.
+
+
+
+WORKFLOW  Explore-plan-code-commit
+
+Explore and plan happens together, we use claude in plan mode and only let it read files to gather information.
+
+Add tools if claude asks and requires.
+
+
+Context—> Claude working memory.
+When its about to full, claude runs /compact command and make summary of context existing data and makes space, In this process we can lose older informations.
+
+We can also run mannualy /compact command.
+
+/clear removes evrything from context
+
+/context shows everything of context
+
+/compact when u want to continue previous conversations and don’t want fresh context.
+
+
+Context-management—>
+
+* Just-in-time context: load what's needed now, let tools pull in the rest. This is the design pattern of the four.Don’t load all files of ur porject and all MCP servers. Ty to use skills if possible at place of mcp servers.
+* Server-side compaction: add a context_management key, and the API summarizes old turns automatically when input crosses the trigger threshold.
+* Prompt caching: Prompt caching allows Claude to reuse stable parts of a prompt across multiple API requests, reducing repeated processing costs and often improving response latency.Claude have auto cahcning and mannual cahching.
+	
+	The key principle is prefix matching. The stable content should 		appear in the same order at the beginning of subsequent 			requests. Changing earlier content can prevent reuse of later content.
+
+
+
+* The memory tool: Claude reads and writes a memory directory via tool calls; you own the storage backend, so context survives across sessions. 
+Session 1
+You tell Claude that your project uses PostgreSQL and Cloudinary. Claude requests a memory write, and your application saves the information.
+Session 2
+You start a new conversation. Claude doesn't automatically have the entire previous conversation. Your application lets it read architecture.md, and Claude retrieves the saved facts.
+The memory survives because the storage exists outside the session—not because Claude permanently learned the information.
+
+
+
+- Use subagents who can run parallel with main agent, let sub agent do task in their own context and give output to the main agent.
+
+
+
+Code review—>
+Before you push a PR, ask Claude to use a subagent to review your changes. The subagent runs in its own context window with fresh eyes — it doesn't carry the bias of the main agent that just spent the session writing the code.
+When creating a code-reviewer subagent, restrict it to read-only tools. A reviewer should flag issues, not edit files. Check the subagent configuration into your repo so your whole team uses the same reviewer.
+
+The /commit-push-pr skill handles the commit, push, and PR creation all in one step. Instead of doing each manually, just run the skill and Claude takes care of it.
+
+If you have a Slack MCP server configured with channels listed in your CLAUDE.md, it will automatically post the PR link to your team's channel.
+
+When Claude creates a PR through “gh pr create”, the session gets linked to that PR automatically. If you need to come back to it later — maybe to address review comments or fix a failing build — 
+run:
+claude --from-pr <PR_NUMBER>
+This picks up right where you left off.
+
+
+Customizing claude code.
+
+—->CLAUDE.md file
+	We put info about our project or task so claude doesn’t have to start over, we also put important claude results which claude can reuse instead of re-calculating. We can also put our project configuaration like indentstion rules, commands to start project ,libraries to use like tailwind or bootstrap etc.
+
+Put CLAUDE.md file into the project root and push it also to github so your team can reuse it.
+
+If u have documentation in project which claude should refer then use @filepath.
+
+—> Subagents
+
+
+—> skills folder in project goes to .claude
+
+
+——> MCP 
+
+/mcp to check active mcp servers.
+
+see explanation on top.
+
+	- commands to add mcp server:
+claude mcp add http for remote servers.
+
+claude mcp add stdio server for local machine servers.
+
+scopes of mcp server are local, user, project.
+
+“Project” in those scopes means your local project folder, the directory on your computer where you run Claude Code (usually a code repository). It does not mean a Projects workspace on claude.ai.
+
+
+Scope	Loads in	Shared with team	Stored in
+Local (default)	Current project only	No, only you	~/.claude.json
+Project	Current project only	Yes, through version control	.mcp.json in the project root
+User	All your projects	No, only you	~/.claude.json
+
+
+Use /mcp command to see active mcp servers and remove unwanted mcp server using disable who eats context.
+
+
+Hooks in claude—> They let us run different commands in different life-cycle of claude code like at the different stages of claude code life-cycle. They exist in agentic loop at a time when claude is trying to complete the task.
+
+Hooks are deterministic, they always runs but CLAUDE.md doesn’t always runs.
+
+Using hooks we can block the dangerous operation while claude do coding in our project like DROP db.
+
+e.g.—> preToolUse, postToolUse, notification,postToolUseFailure, SessionStart etc. even there is type of hooks like command, http etc.
+
+
+—->Hooks return json
+Exit codes, for hooks that don't return JSON
+
+
+0 —> success
+
+2—> blokcing error, If u want to stop call then use status code 2. it can even block STOP hook.
+
+1—> non blocking error. 
+
+
+
+Hooks worth knowing:
+
+* PreToolUse fires before a tool call. This is your enforcement primitive. It's the one that can stop something before it happens.
+* PostToolUse fires after a successful tool call. This is usually where auto-formatting or an auto-lint goes.
+* Stop fires when Claude wants to end its turn. You can refuse and say "no, you're not done yet" if some condition isn't met. There's a matching SubagentStop for when a sub-agent finishes.
+* PreCompact and PostCompact fire before and after compaction.
+* InstructionsLoaded fires when a CLAUDE.md or rule file loads. Handy for auditing what actually made it into context.
+* SessionStart fires at the start and primes the environment. Use the startup source if you only want it on fresh starts.
+
+One thing that trips people up: to re-inject context after compaction, don't use PostCompact. Use SessionStart with the compact matcher. That's the one that actually gets its output back into the conversation.
+
+
+
+
+Claude platform 101
+
+Claude platform is building infrastructure to build applications with claude, using its api we integrate claude in our developed applications. Like instead of sending request to claude from claude.ai platform chatbox, we can send request to claude through our application using claude API and get response and use that to our application.
+
+This platform acts as REST api, SDK or CLI or console to manage API key. 
+
+You can define claude model, role, number of token, tone and request body.
+
+
+
+const client = new Anthropic()
+
+It have three layers->
+
+E.g. of managing Netflix
+
+1- PRIMITIVE
+
+Build with primitives. building blocks.
+
+-Messages API: Send the user's request to Claude.
+-System prompt: Tell Claude to behave like a movie recommendation assistant.
+-Tool use: Allow Claude to request movie information from Netflix's database through approved functions.
+-MCP: Connect Claude to external tools and data sources through the Model Context Protocol, where appropriate.
+-Skills: Provide reusable instructions for specialized tasks, if the application uses a skills-based setup
+
+
+2- Infrastructure → Scale and run applications
+
+Manage app with infrastructure.
+
+e.g. 100M request on Netflix.
+
+-Queues: Buffer work when many requests arrive.
+-Retries and backoff: Retry suitable transient failures without overwhelming the service.
+-Concurrency limits: Keep the number of simultaneous operations under control.
+-Caching: Reuse suitable results when requests and permissions allow it.
+-Orchestration: Coordinate multi-step agent tasks and their execution.
+
+
+3- Control -> 	Controls help you understand whether your AI application is 		behaving correctly and operating within your requirements.
+	It also helps us to check cost.
+
+-Did Claude recommend a relevant genre?
+-Was the recommended movie actually available?
+-How long did the response take?
+-How many tokens did the request consume?
+
+
+—> How to choose a model?
+	Take small input of ur task and start from haiku and whoever gives satisfactory result use it, but if u have requirements about time then use higher models.
+
+—> Tools
+	Tool is a json schema we dispatch them with function.
+	tools give access to claude about external data and actions.
+like databases, files and project management softwares.Your local things which you own even you company code, db is ur local.
+
+claud calls tool then our code execute tool and give answer to claude.
+
+tool have name, description, input schema.  description is most important and claude read it and then use tool.
+
+Tool runner is used to create tools just by giving description of tool in prompt.
+
+We pass tools to claude while sending request to claude in request body in array of tools.
+
+runTool function exist in our code and executes and give response to claude.
+
+
+
+—> Thinking
+
+	-It is usefull to solve mutli-step task where AI can go wrong.
+	-No token budget.
+
+—> Built-in tools aka server tools
+	Common use case tools for each user is built and provided by claude.
+
+e.g. web search like search over internent, code execution environment like sandbox, web fetch means retrive full information from URLs provide by user.
+
+Just we have to provide name in request body tools array and anthropic will run it.
+
+client tools—>
+* Memory — Claude reads and writes memory across sessions
+* Bash — a persistent bash shell so Claude can execute commands
+
+
+
+claude code in action
+
+Scope and steer.
+
+Scope—> Set scopes while u r in plan mode with claude. Read plan given by claude carefully and improve it and make scope.
+
+Steer—> /compact can be used to summarize and we can add instructions after /compact command to tell claude how to summarize and what to keep and what not to delete.
+
+	/rewind —> go back to previous state if wrong claude goto wrong path. you can go back to previous prompt. Each prompt creates a new checkpoint. You can restore code and chat.
+You can even summarize things till a checkpoint.
+
+/goal  —> What output would look like when task is done. goal sets completion condition. Claude will not stop untill goal conditions get completed.
+
+/goal clear will stop claude from working on goal.
+
+/Loop
+Loop runs a prompt on an interval between turns, either fixed or self-paced. Use it to pull something external, like a CI run or a deploy, and act when the state changes.
+To stop a loop, just press escape.
+
+
+—worktree 	(.worktreeinclude)
+The steering metaphor so far assumes one steering wheel in one car. But when you're running multiple agents on the same codebase, you don't want two steering wheels in one car. That's unsafe. Two Claude sessions fighting over the same files leads to conflicts.
+That's where worktrees come in. Instead of sessions stepping on each other, each one gets its own independent file tree.
+
+
+CLAUDE.md isn't just one file sitting in your project. There are four places it can live, and Claude loads all of them together at launch. Nothing gets dropped, and they stack.
+Here's what each one is for:
+* Managed policy — the org-level file your platform team controls. You can't exclude it, so org policy is always in play.
+* User — your personal preferences that follow you across every project on your machine.
+* Project — the file shared with your team, checked into the repo.
+* Local — ignored by git. Your personal notes for this one repository only.
+
+Emphasis is a budget
+Words like "IMPORTANT" and "YOU MUST" do raise a rule's priority. 
+
+
+Verification skills —>
+
+skills folder can hold more than skills.md , it can hold reference.md and check.sh
+
+reference.md —> details information about procedure of task that shuld be followed.Linked with @reference.md inside skills.md
+check.sh —> command to run tests.
+
+
+Think about how you normally check Claude's work. You ask it to refactor something, it finishes, and then you have to remember to double-check it. Maybe you ask it to run the tests. Maybe you read the diff yourself. The problem is that the checking depends on you remembering to ask for it. Skip that step once and bad code slips through.
+A verification skill removes that dependency. Here's the shape of it. You ask Claude to refactor something. When it finishes, the change matches the skill's description, so the skill fires on its own. From there it:
+* Runs the test suite.
+* Reads the diff.
+* Checks that no test was weakened just to make things pass.
+* Reports pass or fail, with the evidence attached.
+
+Its just normal skill folder in skills folder
+
+Q: Why check the diff if tests already pass?
+
+Answer: Because Claude might modify or weaken test cases just to make them pass, which can hide bugs or introduce security issues.
+We use both Git diff and Claude for verification:
+* Git diff shows the code changes, including added, removed, or modified lines.
+* Claude analyzes those changes to identify potential bugs, weakened tests, or security problems.
+Therefore, passing tests alone is not enough. We must also review the changes to ensure the code and tests remain correct and reliable. Using git diff claude re-verify and try to find bugs even if bugs and error not occur instantly.
+
+
+
+Q. The six permission modes
+
+
+1. Manual
+Claude asks permission for actions beyond reading. You stay in control of changes and commands.
+Best for: cautious, interactive work.
+
+2. Accept edits
+Claude can edit files without asking for each edit, while actions outside the mode's allowed permissions may still require approval.
+Best for: normal coding and refactoring.
+
+3. Plan
+Claude explores your code and proposes an implementation without making code changes.
+Best for: understanding a problem before implementing it.
+
+4. Auto
+Claude works more independently. A separate classifier reviews actions before execution to help prevent actions outside the intended scope.
+Best for: more autonomous coding with safeguards.
+
+5. Don't ask
+Claude can use tools that are already permitted by the configuration. Other actions are denied rather than prompting you.
+Best for: unattended runs with a carefully configured allowlist.
+
+6. Bypass permissions
+Permission checks are skipped. This is risky because commands and changes can execute without normal approval safeguards.
+Use only in a suitably isolated environment, such as a disposable container or VM.
+
+
+Yes! You can build your own classifier, but there is an important distinction: you can create a custom safety classifier for your application; that does not mean you can replace Claude Code's built-in Auto-mode classifier. Inbuilt classifier will run
+
+
+/install-github (done by admin inside claude api)
+/code-review
+
+
+1. Run /code-review to walk the changes and flag issues.
+2. Then put your own eyes on git diff.
+
+
+* Read the diff yourself.
+* Turn the tests into a hook that gates the turn.
+* Verify headless runs by their JSON result and exit code.
+* Get a cold second opinion on anything that matters.
+
+
+
+ROUTINES:
+
+(Same prompt on recurring trigger)
+Here's the mental model for what a routine ties together: a prompt, the repo, connectors, and a schedule.
+
+We can build routines: In 2 ways
+
+    1. You can use claude in built routines to make routines from claude.ai or /schedule command to create in built routine from terminal. You just can build by giving prompt.
+		
+		e.g /schedule daily dependency audit at 9 am
+		e.g /schedule give notification on new PR on git branch
+
+	
+	2. Headless —>
+		
+		The core of headless mode is the -p flag (short for --print). It 		runs Claude Code as a one-shot command with no 				interactive UI in ur environemtn. It reads standard in and writes standard out, so it pipes like any other shell tool:
+
+You run Claude Code from a terminal command or script using -p (short for --print). You control how it is invoked and how its output is processed.
+Example: A Python script sends a Git diff to Claude, receives a review, and saves the result to a report.
+
+
+
+		claude -p "summarize the changes in this diff"
+
+* Routines are the default for repeat work. They run on Anthropic's infrastructure with nothing for you to host.You save a prompt, select a repository, configure connectors if needed, and choose a trigger. Anthropic's infrastructure runs the task when triggered.
+
+
+* Headless mode with -p is for when the job needs your pipeline and you want to pipe data through a script.
+* 
+The key distinction: Headless mode doesn't mean routine, and it doesn't automatically repeat a task. It makes Claude Code suitable for automation, including routines.
+Headless mode: Runs Claude Code without opening an interactive chat session.
+
+Headlesss mode is often used to run routines automatically. That's probably why your course mentions them together.
+
+
+claude -p "Summarize the changes in this diff"
+
+* claude starts Claude Code.
+* -p enables print mode.
+* The quoted text is the task.
+* Claude returns a response without opening the usual interactive chat interface.
+
+
+--bare	Use a minimal, more controlled startup for CI workflows, as described in your lesson.
+Agent SDK	Integrate Claude Code's agent capabilities into your own Python or TypeScript application.
+For example, if you eventually want AI-assisted code review built into your own Django-related tooling, the Agent SDK is the more application-oriented option. Headless mode is often simpler for a script or pipeline.
+
+
+
+Multi-step automation with sessions
+For work that happens across multiple steps, you don't have to cram everything into one command. Capture the session's ID from the JSON output and resume it later:
+claude --resume "$(jq -r .session_id /tmp/plan.json)"
+One script kicks off the work. Another resumes it later with full context. This is handy when the first pass produces a plan and a second pass carries it out.
+
+
+Deterministic runs for CI
+When CI needs the same results every single run, there's a mode built for that.
+The --bare flag gives you deterministic mode. It's the right choice when you're running Claude Code inside a pipeline and you want repeatable, predictable output rather than anything that varies run to run.
+
+
+
+
+CODE REVIEW AUTOMATION
+
+1—> /code-review  The simplest option is Code Review. It's an Anthropic-hosted service that reviews your pull requests through the Claude GitHub app. There's nothing for you to build or host. You turn it on, and it starts posting findings as inline comments right on the lines that matter.
+We can’t write workflow on a PR.
+
+From there the admin installs the Claude GitHub app, picks which repos it watches, and decides when it runs. You have a few choices for timing:
+* Once when a PR opens
+* On every push to the PR
+* Only when someone comments @claude review
+
+
+Since there's no autofix in the service, applying a finding is a local move. From your own terminal, the /code-review command reviews a diff, and its --fix flag applies the findings to your working tree. So the flow is: Claude finds it in the PR, you pull it down and fix it locally.
+
+
+What does --fix do?
+* /code-review — reviews a diff for potential issues.
+* /code-review --fix — asks the command to apply fixes for findings to your local working tree like in ur files, not in github. 
+
+2 —> github actions:
+	
+Code review and directly do fixes on github repo without importing and using —fix locally.
+write workflow for claude to do task on PRs.
+
+/install-github-app
+
+
+The claude_args line is where the fine-tuning happens. A few knobs worth knowing:
+* --max-turns 5 puts a hard cap on the agent loop, so it can't run forever.
+
+
+
+
+
+PLUGINS
+
+You build a great .claude directory with skills, subagents, and hooks, settings.json and then what? Everyone copies and pastes files between machines and hopes they stay in sync. Plugins fix that. A plugin is how Claude Code packages a setup and moves it from one person to the next.
+
+Creating a custom plug-in ?
+
+To let other people install your Claude Code plugin, the recommended approach is to publish it in a plugin marketplace before that host it on GitHub repository.
+
+
+
+Step 1: Create a GitHub repository
+Create a repository named pinterest-reviewer-marketplace and organize it like this:
+
+pinterest-reviewer-marketplace/
+	.claude-plugin/
+		marketplace.json
+	plugins/pinterest-reviewer/
+		.claude-plugin/plugin.json
+		skills/review-code/SKILL.md
+		agents/django-reviewer.md
+
+
+The marketplace contains a catalog of plugins its like plug-ins app store, while the plugin directory contains the actual functionality.
+
+
+Step 2: Tell other people how to install it
+Once your repository is published in marketplace, users open Claude Code and run:
+First, add your marketplace
+Replace the username with your actual GitHub username.
+e.g.
+/plugin marketplace add YOUR_USERNAME/pinterest-reviewer-marketplace
+
+
+
+
+/plugin install org-name@plugin-name
+Here's what that looks like. Claude Code installs it and tells you to run /reload-plugins to apply the change.
+
+
+Adding a marketplace for your team
+For a team, the better move is to add a private marketplace once. A marketplace is a shared source that plugins resolve through:
+/plugin marketplace add your-org/claude-plugins
+Call it whatever you want. Once it's added, every install after that resolves through it. You get centralized discovery, version tracking, and updates in one place instead of scattered across everyone's laptop.
+You can browse what's available from the Discover tab. It lists the plugins on your marketplaces so you can search and pick.
+
+Its like appstore of plugin for ur comapny.
+
+
+
+Two things worth knowing about where plugins come from:
+
+
+
+1. Community marketplace
+The community marketplace is where community members can submit plugins.
+The process described in your course is:
+1. A developer creates a plugin.  
+2. They submit it through the in-app submission form.  
+3. Anthropic's automated review runs.  
+4. The submission is posted to the community marketplace after that review.  
+Think: Community-created plugins that go through an automated review process.
+2. Official marketplace
+The official marketplace follows a separate curation process.
+It isn't simply another name for the community marketplace, and a community submission isn't automatically an official-marketplace plugin.
+Think: A separately curated collection managed through its own process.
+
+
+How to load a plugin to market place?
+my-marketplace is a placeholder for the marketplace containing your plugin. You must register the marketplace first, and the plugin must be available there.
+
+claude --plugin-dir ./pinterest-reviewer-plugin to load a plugin locally.
+ 
+
+Components 
+A plugin doesn't overwrite your configuration. Its components run alongside your own. That's mostly good, but it has consequences you should understand.
+
+look for agent key
+
+
+
+HOW TO CREATE AGENT?
+
+Step 1 — Create the agent file
+From your Pinterest project root, create:
+.claude/
+└── agents/
+    └── django-reviewer.md
+
+Step 2 — Add the agent configuration
+Put this in .claude/agents/django-reviewer.md:
+---
+name: django-reviewer
+description: Reviews Django code for security issues,
+  authentication bugs, authorization mistakes, and
+  unsafe database operations.
+tools: Read, Grep, Glob
+model: sonnet
+---
+
+You are a Django security reviewer.
+
+Inspect the code and look for:
+
+1. Views missing authentication checks.
+2. Users accessing or deleting another user's pins.
+3. Unsafe database operations.
+4. Missing input validation.
+5. Exposed secrets or sensitive information.
+
+For every finding, report:
+- Severity
+- File and line number
+- Why it is a problem
+
+
+Start Claude Code in the project and ask:
+Use the django-reviewer agent to inspect my pin
+deletion view and identify authorization problems.
+You can also mention the agent by name in your request. Claude can delegate the review to that specialized agent.
+
+
+
+
+
+AI FLUENCY FRAMEWORK
+
+We also introduce three ways people engage with AI:
+* Automation: The AI completes specific tasks based on your instructions. You tell the steps or workflow.
+* Augmentation: You and AI collaborate as creative thinking and task execution partners.
+* Agency: You configure AI to work independently on your behalf, establishing its knowledge and behavior patterns rather than just giving it specific tasks. It creates own workflow and steps.
+
+
+
+Knowledge cuttoff date: AI doesn’t know data after that date.It was the date it was trained.
+
+AI cannot offer : critical thinking, judgement, creativity, eithical - political oversight.
+ 
+
+  
+
+  
+MORE ABOUT 4D—>
+
+
+DELEGATION
+Delegation is consist of problem awareness that what are u trying to achieve, platform awareness means knowing AI capabilities and task division.
+
+DESCRIPTION
+ We introduce three key components of Description:
+* Product Description: Clearly defining what you want the AI to create
+* Process Description: Guiding how the AI approaches your request
+* Performance Description: Defining how you want the AI to behave during your collaboration.
+
+
+PROMPT ENGINEERING
+Prompt engineering is simply the practice of designing effective instructions for AI systems, combining familiar human communication principles with AI-specific considerations.
+
+* Six foundational prompting techniques:
+    * Give context: Be specific about what you want, why you want it, and relevant background
+    * Show examples: Demonstrate the output style or format you're looking for
+    * Specify constraints: Clearly define format, length, and other output requirements
+    * Break complex tasks into steps: Guide the AI through multi-step reasoning
+    * Ask the AI to think first: Give space for the AI to work through its process
+    * Define the AI's role or tone: Specify how you want the AI to communicate
+
+
+DESCERNMENT
+
+Discernment is your ability to thoughtfully evaluate what AI produces, how it produces it, and how it behaves.
+
+* Product Discernment focuses on evaluating the quality of actual outputs (accuracy, appropriateness, coherence, relevance)
+* Process Discernment involves assessing how the AI arrived at its output, looking for logical errors, attention gaps, or inappropriate reasoning
+* Performance Discernment evaluates how the AI behaves within the collaboration process itself, considering whether its communication style is effective for your needs
+* Discernment works hand-in-hand with Description in a continuous feedback loop
+
+
+DILIGENCE
+Diligence addresses ethical and safety aspects of AI collaborations.
+
+* Creation Diligence: Being thoughtful about which AI systems you choose and how you work with them. Like sharing companies data comes in ethical deligence.
+* Transparency Diligence: Being open about AI's role in your work bcoz it can affect them.
+* Deployment Diligence: Taking ownership for AI-assisted outputs you share with others.
+
+
+We emphasize that these 4D competencies apply across all three major ways of interacting with AI (Automation, Augmentation, and Agency).
+
+Key takeaways
+* AI Fluency develops through intentional practice of the four core competencies
+* Delegation emphasizes that our expertise and judgment remain the foundation of effective AI collaboration
+* Description involves clear communication that bridges our intentions and AI capabilities
+* Discernment requires thoughtful and critical evaluation of outputs to work within the systems constraints
+* Diligence ensures accountability, transparency, and responsibility in our AI work
+
+
+
+
+INTRODUCTION to MODEL CONTEXT Protocol
+
+Model Context Protocol (MCP) is a communication layer that provides Claude with context and tools without requiring you to write a bunch of tedious integration code.
+
+Without MCP, you'd need to create an incredible number of tool schemas and functions to handle all of other existing application features.
+This means writing, testing, and maintaining all that integration code yourself. That's a lot of effort and ongoing maintenance burden.
+
+How is this different from calling APIs directly?
+MCP servers provide tool schemas and functions already defined for you to connect with other application. If you want to call an API directly, you'll be authoring those tool definitions on your own. MCP saves you that implementation work.
+
+Isn't MCP just the same as tool use?
+This is a common misconception. MCP servers and tool use are complementary but different concepts. MCP servers provide tool schemas and functions already defined for you, while tool use is about how Claude actually calls those tools.
+
+
+
+Components of MCP:
+
+MCP client, MCP Server, Outside service.
+
+
+Our server/code —> MCP CLient —> MCP server
+
+Using MCP client we access the tools of MCP servers.
+
+Transport Agnostic Communication
+One of MCP's key strengths is being transport agnostic - a fancy way of saying the client and server can communicate over different protocols depending on your setup.
+
+Most common setups runs both the MCP client and server on the same machine, communicating through standard input/output. But you can also connect them over:
+* HTTP
+* WebSockets
+* Various other network protocols
+
+
+CallToolRequest/CallToolResult: The client asks the server to run a specific tool with given arguments, then receives the results.
+
+
+Let's say a user asks "What repositories do I have?" Here's the step-by-step flow:
+1. User Query: The user submits their question to your server
+2. Tool Discovery: Your server needs to know what tools are available to send to Claude
+3. List Tools Exchange: Your server asks the MCP client for available tools
+4. MCP Communication: The MCP client sends a ListToolsRequest to the MCP server and receives a ListToolsResult
+5. Claude Request: Your server sends the user's query plus the available tools to Claude
+6. Tool Use Decision: Claude decides it needs to call a tool to answer the question
+7. Tool Execution Request: Your server asks the MCP client to run the tool Claude specified
+8. External API Call: The MCP client sends a CallToolRequest to the MCP server, which makes the actual GitHub API call
+9. Results Flow Back: GitHub responds with repository data, which flows back through the MCP server as a CallToolResult
+10. Tool Result to Claude: Your server sends the tool results back to Claude
+11. Final Response: Claude formulates a final answer using the repository data
+12. User Gets Answer: Your server delivers Claude's response back to the user
+
+Correct summary —>
+
+Main thing is our server collects list of all avaialabe tool available to MCP server by talking to MCP Client which communicates with MCP server. MCP client and MCP server communication is known as MCP communication, Claude decides which tool to use and tells our server? Our server sends MCP client to run tool who tell MCP server and then MCP server call the github api, gets the data and respond to MCP client and then client respond to server and then server gives data to claude and then claude does operation on data and gives to our server.
+
+
+Practice task—> Build a server which gives a api thorugh which we can read and write our API. This is not MCP related, doing this without MCP logic.
+
+Ans—>
+So we can create a backend and a API which expose 2 function who can read and write our local files by filenames.
+We can internally use find CLI  command to find files by filename.
+
+Now with MCP logics and syntax and jargons doing same thing.
+
+
+——> Build mcp tools using mcp module.
+
+Using MCP SDK we build mcp tools
+
+@mcp.tool (this is decorator)
+
+mcp inspector—> is a browser based inspector to test tools.
+
+mcp dev mcp_server.py (command)
+
+
+
+MCP client —> CLient session(this connects MCPclient to MCPserver) —> MCP server
+
+
+MCP client have client class code how Client class interact with our server and MCP server.
+
+In client class Client MCP is implemented.
+
+@Resource
+Resources in MCP servers allow you to expose data to clients, similar to GET request handlers in a typical HTTP server. They're perfect for scenarios where you need to fetch information rather than perform actions.
+
+
+@mcp.prompt to create a optimised in-built prompts for user and give them to user. Defaults prompts given by claude.ai are also made by this.
+tools like read file from google drive in claude.ai we use resource.
+ 
+
+Summary—>
+
+Tools: Model-Controlled
+Tools are controlled entirely by Claude. The AI model decides when to call these functions, and the results are used directly by Claude to accomplish tasks.
+Tools are perfect for giving Claude additional capabilities it can use autonomously. When you ask Claude to "calculate the square root of 3 using JavaScript," it's Claude that decides to use a JavaScript execution tool to run the calculation.
+Resources: App-Controlled
+Resources are controlled by your application code. Your app decides when to fetch resource data and how to use it - typically for UI elements or to add context to conversations.
+In our project, we used resources in two ways:
+* Fetching data to populate autocomplete options in the UI
+* Retrieving content to augment prompts with additional context
+Think of the "Add from Google Drive" feature in Claude's interface - the application code determines which documents to show and handles injecting their content into the chat context.
+Prompts: User-Controlled
+Prompts are triggered by user actions. Users decide when to run these predefined workflows through UI interactions like button clicks, menu selections, or slash commands.
+Prompts are ideal for implementing workflows that users can trigger on demand. In Claude's interface, those workflow buttons below the chat input are examples of prompts - predefined, optimized workflows that users can start with a single click.
+Choosing the Right Primitive
+Here's a quick decision guide:
+* Need to give Claude new capabilities? Use tools
+* Need to get data into your app for UI or context? Use resources
+* Want to create predefined workflows for users? Use prompts
+
+
+
+
+INTRODUCTION TO AGENT SKILLS
+
+
+SKILLS->
+
+Instructions for repeated task.How to do that task ?
+
+When Claude Code starts, it scans four locations for skills enterprise, personal, project, plugins but only loads the name and description — not the full content. This is an important detail.
+When you send a request, Claude compares your message against the descriptions of all available skills.
+
+
+Skills —> reusable markdown files that teach Claude Code how to handle specific tasks automatically. Instead of repeating instructions every time you ask Claude.
+ You write a skill once and Claude applies it whenever the task comes up.
+Claude loads only skill names and descriptions at startup.
+You get a confirmation prompt before Claude loads the full skill content into context.
+
+* Priority for name conflicts: Enterprise → Personal → Project → Plugins
+
+	If your personal skill conflict with enterprise then then enterprise will always win, rename your personal skill or talk to admin to rename enterprise skill.
+
+
+
+There are two types of skills -
+
+* Personal skills go in ~/.claude/skills and follow you across all projects. Personal skill live in home folder of user.
+* Project skills go in .claude/skills inside a repository and are shared with anyone who clones it
+
+Skills load on demand — unlike CLAUDE.md (which loads into every conversation) or slash commands (which require explicit invocation), skills activate automatically when Claude recognizes the situation.
+
+
+.claude —> skills-folder —> Each skill folder as name—> skill.md, reference.md
+
+Avanced folder structure—>
+
+skills folder—>
+
+* (folder) scripts/ — Executable code
+* (folder) references/ — Additional documentation
+* (folder) assets/ — Images, templates, or other data files
+* skill.md
+
+
+Advance control on skills—>
+
+* name and description are required — allowed-tools and model are optional but powerful additions
+* A good description answers two questions: What does the skill do? When should Claude use it?
+* allowed-tools restricts which tools Claude can use when the skill is active — useful for read-only or security-sensitive workflows
+* Progressive disclosure: keep SKILL.md under 500 lines and link to supporting files (references, scripts, assets) that Claude reads only when needed
+* Scripts execute without loading their contents into context — only the output consumes tokens, keeping context efficient.
+	
+	Script execution: Claude follows the Skill's instructions and requests execution through a tool such as Bash. Claude Code's permission settings determine whether execution is allowed immediately, requires approval, or is denied.
+
+	Permission will still be required to claude.  
+
+
+Use CLAUDE.md for:
+* Project-wide standards that always apply
+* Constraints like "never modify the database schema"
+* Framework preferences and coding style
+Use Skills for:
+* Task-specific expertise
+* Knowledge that's only relevant sometimes
+* Detailed procedures that would clutter every conversation
+
+
+
+SHARE SKILLS
+
+- When u share project to git-hub then project SKILLS are shared automatically bcoz porject SKILL live in .claude/SKILLS
+- To share SKILLS without project we can use plugin and share them in marketplace.
+- Subagents don't automatically see your skills — you must explicitly list skills in a custom agent's skills field.
+- Built-in agents (Explorer, Plan, Verify) can't access skills at all — only custom subagents defined in .claude/agents can
+
+
+
+SKILLS debugger and teser —>
+
+When debugging Skills and Plugins in Claude Code, the key is to determine whether the problem is with discovery, configuration, invocation, or execution.
+
+
+
+skills-ref command is use to test skills.
+claude —debug to see skill errors.
+
+skills-ref validate path_of_plugin to folder-structure of plug-in.
+
+1- If skills aren’t triggering on speciallized task then skill description is not overlapping, make you description word more overlapping with request/prompt description.
+
+2- Skills aren’t loading then, Check folder structure of skill. ask to claude
+What skills are available to you?
+
+3—> If your personal skill conflict with enterprise then then enterprise will always win, rename your personal skill or talk to admin to rename enterprise skill.
+
+4—> If plugin skills aren’t appearing then clear cache and reinstall
+	rm ~/.claude/plugins/cache (clear cache)
+
+5—> runtime failure check dependency, permission and paths.
+	
+	claude —debug
+
+6 —> If Claude recognizes the skill but doesn't follow its instructions, simplify the instructions and test again. This helps distinguish a discovery problem from an instruction-following problem.
+
+	/review-code Review app.py for security issues.
+
+Debugging plugins
+
+1.claude --plugin-dir ./pinterest-reviewer
+This loads the plugin for that session without permanently installing it. Make sure the path points to the plugin root, containing .claude-plugin/plugin.json and the component directories.
+
+2./reload-plugins	Reloads plugins during a session.
+3.claude --plugin-dir ./my-plugin	Loads a local plugin for testing.
+
+4.claude --debug --plugin-dir ./pinterest-reviewer load plugin in debug mode.
+
+5. claude --debug='startup,mcp' --plugin-dir ./pinterest-reviewer
+	filter logs to relevant categories:
+
+6. claude --debug-file ./claude-debug.log \  --plugin-dir ./pinterest-reviewer
+
+	You can also write logs to a file:
+
+
+
+
+
+
+
