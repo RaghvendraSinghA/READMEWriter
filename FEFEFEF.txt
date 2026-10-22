@@ -1,0 +1,657 @@
+BUILDING WITH CLAUDE API
+
+
+— Prompt caching does not mean Claude returns the same answer for the same prompt.
+Prompt caching is a performance and cost optimization technique: It lets Claude reuse previously processed prompt content instead of processing that same content from scratch on every request.
+
+
+— Claude server see a function or tool error and try to fix it and then call function, tool again.
+
+
+— To test a syntax of a output data with code, try to strip its words, you will get error if wrong syntax.
+
+
+- Omit means don’t include.
+
+
+What is a token ?
+A token is a chunk of text, roughly 3 to 4 characters of English, or about three-quarters of a word.
+
+e.g.—> 
+"cat"      → 1 token
+"hello"    → 1 token
+"the"      → 1 token
+
+"unbelievable"   → un | believ | able         (about 3 tokens)
+"tokenization"   → token | ization            (about 2 tokens)
+"Bengaluru"      → Beng | al | uru            (about 3 tokens)
+
+"Hello, world!"  → Hello | , | world | !      (about 4 tokens)
+
+The space before a word is usually attached to the word, so “  world” is a single token.
+
+"2026"           → about 1 to 2 tokens
+"print('hi')"    → print | (' | hi | ') | ...  (about 4 to 5 tokens)
+
+
+ Rough sizes:
+* 1 million tokens is about 750,000 words, or several long novels, or a large codebase.
+* 128,000 tokens is about 96,000 words, or a short book.
+
+Newer models use a token-izer that produces about 30% more tokens for the same text than older ones like Haiku 4.5, so the same document uses more of the window.
+
+Hindi, Kannada and other non-Latin scripts usually use more tokens per word than English.
+
+
+Summary:
+
+* 1 token is about 4 characters, or about ¾ of a word.
+* 100 tokens is about 75 words.
+* A page of text is about 400 to 500 tokens.
+
+
+
+What is claude 400 error ?
+
+A 400 from the Claude API means invalid_request_error: the server understood the request but rejected it because something in it is malformed or not allowed. It’s a problem with the request, so retrying the same request will fail the same way.
+The error body looks like this:
+
+json
+{
+  "type": "error",
+  "error": {
+    "type": "invalid_request_error",
+    "message": "max_tokens: Field required"
+  }
+}
+The message field tells you what’s wrong, so read it first.
+
+Common causes
+
+* Missing or wrong fields: no max_tokens, no model, or an empty messages list.
+* Bad message structure: roles that don’t alternate properly, the first message not being from the user, or an empty content block.
+
+The first message not being from the user
+The conversation must start with a user message. Starting with assistant is rejected:
+
+json
+"messages": [
+  {"role": "assistant", "content": "Hello!"},   // wrong first message
+  {"role": "user", "content": "Hi"}
+]
+This often happens when you load saved chat history and the first user turn got trimmed off.
+
+An empty content block
+Every message needs real content. These cause errors:
+
+json
+{"role": "user", "content": ""}
+{"role": "user", "content": []}
+{"role": "user", "content": [{"type": "text", "text": ""}]}
+This usually comes from code that sends a blank string, such as an empty text box or a failed earlier step that returned nothing.
+
+
+* Invalid JSON: a stray comma, bad escaping, or a wrong content type.
+* Unsupported parameters for that model: the newer models (Sonnet 5 and later) return 400 if you set temperature, top_p or top_k to non-default values, or use manual extended thinking budgets. This is the most likely cause if you’re moving older code to Claude 5.x.
+* Thinking settings: max_tokens too small for the thinking setup, or a bad thinking configuration.
+* Bad tool definitions: malformed JSON schema, or a tool_result that doesn’t match a tool_use ID.
+* Invalid content: unsupported image type, an oversized file, or a bad base64 string.
+* Too much input: a prompt that exceeds the context window.
+* Billing: some account or credit problems also come back as invalid_request_error, such as a credit balance that’s too low.
+
+
+How to debug it
+1. Read error.message and fix the field it names.
+2. Check the model’s page in the docs for parameters it no longer accepts.
+3. Strip the request down to a minimal one (model, max_tokens, one user message), then add pieces back until it breaks.
+
+
+Related errors
+* 401: bad or missing API key.
+* 403: your key isn’t allowed to do that.
+* 404: wrong model ID or endpoint.
+* 413: request too large.
+* 429: rate limited.
+* 500 and 529: server errors or overload, where retrying is appropriate.
+The full list is in the API errors page at docs.claude.com. If you paste the exact error message and your request (with the key removed), I can tell you what to fix.
+
+
+CONTEXT WINDOW and MAXIMUM OUTPUT :
+These are the two size limits that apply to every request to a model like Sonnet 5.5, Opus 5.5 or Haiku 5.5.
+
+Context window: 1 million tokens
+This is the model’s working memory for a single request:
+ the most text it can see at once. Everything counts toward it:
+* Your system prompt
+* The whole conversation history you send in messages
+* Files, images and documents you include
+* Tool definitions and tool results
+* The model’s own thinking and reply
+If the total goes past the limit, the request fails (or gets cut off), and the model can’t see anything beyond it. 
+
+Maximum output: 128,000 tokens
+This is the longest single reply the model can produce in one response. It’s separate from the context window, and it’s much smaller. Your max_tokens setting caps the reply at or below this number. With thinking enabled, thinking tokens count toward max_tokens, so a low value can cut the response off after the thinking and before any answer text.
+
+Token calculation on prompt and result from request and response of claude API.
+
+- input (prompt + history + files) + output (thinking + reply) ≤ 1M tokens.
+
+- reply (including thinking) ≤ 128K tokens
+
+
+
+
+ADAPTIVE VS EXTENDED THINKING
+
+Extended thinking — older configuration
+
+You explicitly enable thinking and set a token budget.
+thinking = {    "type": "enabled",    "budget_tokens": 10000}
+
+Used by models such as Haiku 4.5 and Opus 4.5. Some intermediate models deprecated this configuration.
+
+Adaptive thinking — newer configuration
+The model decides whether and how deeply to think for each request. You steer its behavior using effort.
+thinking = {    "type": "adaptive"}output_config = {    "effort": "high"}
+
+Used by newer models such as Fable 5.1, Opus 5.5, Sonnet 5.5, and Haiku 5.5. Exact configuration options vary by model.
+
+
+With a fixed manual budget, the older configuration allocates a specific maximum number of tokens for thinking. With adaptive thinking, Claude decides how much thinking is appropriate, while effort influences its overall reasoning behavior.
+
+
+Effort levels explained
+Level	Meaning	Example use
+low	Minimize effort, latency, and token use	Simple classification
+medium	Balanced reasoning and cost	Routine coding tasks
+high	Deeper reasoning for harder work	Debugging a complicated Django bug
+xhigh	Extended capability for demanding tasks	Long-running agentic coding
+max	Maximum capability with no effort constraint	Extremely difficult, high-stakes engineering analysis
+
+
+These levels are not fixed token budgets. A high request does not guarantee a particular number of thinking tokens. Support also varies by model: for example, Opus 4.6 supports max but not xhigh, whereas Opus 4.7 supports both.
+
+Higher effort generally encourages more thorough reasoning, potentially increasing latency and token usage. However, it still does not mean that Claude must consume the maximum possible tokens.
+
+Effort is Directly propotional to Thinking propotional to cost.
+
+
+
+What are sampling parameters?
+Sampling parameters influence how a language model chooses the next token when generating a response.
+
+The three parameters are :
+
+temperature
+Controls the randomness of token selection.
+* Lower values generally produce more predictable output.
+* Higher values generally produce more varied output.
+* It does not directly control the amount of reasoning. 
+top_p
+Uses nucleus sampling: it considers a group of likely tokens whose cumulative probability reaches a specified threshold.
+For example, top_p = 0.9 selects from a probability-based candidate set containing approximately 90% of the probability mass.
+
+
+top_k
+Restricts sampling to the k most likely next-token candidates.
+For example, top_k = 10 limits the candidate set to the 10 highest-probability tokens.
+These are general sampling concepts. The exact supported behavior depends on the model and API
+
+
+——
+According to the documentation excerpt you shared, the specified newer models reject non-default sampling parameters.
+
+The default sampling parameter means the parameter's normal default setting, rather than a custom value you choose.
+
+non-default means values you cannot set, it is default set by claude.
+
+For Claude models that reject non-default sampling settings, here's the distinction:
+Parameter	Example of a default value	Example of a non-default value
+temperature	1 (commonly the default)	0.2
+top_p	Omitted / default behavior	0.8
+top_k	Omitted / default behavior	10
+Important: These are illustrative examples, not a guarantee of the exact defaults for every Claude model. Check the specific model's API documentation.
+
+
+If we cannot use these parameters, how do we control Claude's behavior?
+Anthropic recommends prompting instead of adjusting sampling parameters for these models.
+
+e.g—>
+Answer in a precise, professional style.
+Use only verifiable facts.
+Avoid speculation and unnecessary creativity.
+
+For different tasks, you could write prompts like these:
+* Predictable output: "Follow the specified format exactly and do not add extra sections."
+* Creative output: "Explore several imaginative approaches and use vivid descriptions."
+* Coding: "Prefer the simplest maintainable solution and explain any important trade-offs."
+* Structured output: "Return valid JSON matching the specified schema, with no surrounding commentary."
+Prompting guides the model's behaviour, but it is not a mathematically equivalent replacement for sampling controls.
+
+Feature	What it controls
+Adaptive thinking	How much reasoning Claude decides to perform
+Effort	The overall reasoning effort encouraged
+Temperature	Randomness in token selection, where supported
+Top-p	Probability-based token candidate selection
+Top-k	Number of highest-probability token candidates considered
+
+
+
+
+
+Why You Need a Server ?
+
+You should never make requests to the Anthropic API directly from client-side code. Here's why:
+* API requests require a secret API key for authentication
+* Exposing this key in client code creates a serious security vulnerability
+* Anyone could extract the key and make unauthorized requests
+Instead, your web or mobile app sends requests to your own server, which then communicates with the Anthropic API using the securely stored key.
+
+
+
+What are the ways we can send request to Anthropic server?
+
+Ans—> Either use Python SDK or use  plain http to make request.
+
+
+What every request must contain?
+
+Ans —> API key, non blank-messages, models and max_tokens.
+
+Can we pass blank string as message? 
+
+Ans—> Nope, use either “ “ or atleast one character, technically space is also a character. 
+
+
+How claude process your request?
+
+Ans—> 1. Break lines in tokens. (Tokenization)
+	     2. Each tokens get their all possible definations or meaning of token in real word. (Embedding)
+	     3. Cloude redefines each tokens embedding using surrrounding  tokens context (Contextualization)
+	     4. Claude passes contextualized embadding to an output layers which checks all the possibilities of next word then, adds that word to current sequence.	(token selection)
+
+
+How claude stops generating?
+
+Ans—> 
+
+* Max tokens reached - Has it hit the limit you specified?
+* Natural ending - Did it generate an end-of-sequence token?
+	Claude finishes its response normally by generating an end-of-turn marker.
+* Stop sequence - Did it encounter a predefined stop phrase?
+	You can configure a stop sequence in the API request. When Claude generates a matching sequence, generation stops.
+const response = await anthropic.messages.create({
+  model: "claude-sonnet-4-5",
+  max_tokens: 100,
+  stop_sequences: ["END"],
+  messages: [
+    {
+      role: "user",
+      content: "Write a short sentence and then END."
+    }
+  ]
+});
+
+console.log(response.stop_reason);
+
+
+How claude sends response?
+
+Ans—> After end of generation, claude returns token usage input_token and output_token, result in message, reason of end of generation.
+
+
+client = Anthropic()
+
+
+How to create a message for Anthropic API?
+Ans—> client.messages.create() 
+
+How API key is connected to request??
+Ans—> When we load env in file and if there is Anthropic() then Anthropic will already read API key from env.
+
+
+How messages are saved?
+Ans —> When working with the Anthropic API, Claude doesn't store any of your conversation history. Each request you make is completely independent, with no memory of previous exchanges.
+
+Does python have in-built input function ? Ans —> yes a = input(“ENter”)
+ 
+
+
+Temperature?
+Ans—> Controls randomness selection of all tokens. Low temperature means less randomnes,less creativity on answer.
+
+System prompt ?
+Ans—> System propmpt is use to set tone and role for agent, subagent before they generate response.
+
+
+How claude generates reqponse continiously and not just 1 full request?
+Ans—> It doesn’t use normal req, response method, it usages streaming. I have alot of Delta and events, read them
+
+stop_sequence and assistance message(message prefilling) ?
+Ans—> Chapter: Structured data and Structured data exercise.
+Ans—>When you need Claude to generate structured data like JSON, Python code, or bulleted lists, you'll often run into a common problem: Claude wants to be helpful and add explanatory text around your content. While this is usually great, sometimes you need just the raw data with nothing else.
+
+
+
+Prompt engineering and evaluation-
+Ans—> Both of these goes in hand in hand. When we give prompt to agent or claude, we want to check weather it is generating desired output or not, If not then how close it is, To check these we use prompt evaluation either using code based grading or model based grading.
+
+Don’t evaluate your prompt with same agent because it have bias toward its work, instead use subagent to evaluate prompt.
+
+While prompt evaluation with model ask model to do evaluation based on reasoning, strength and weakness else it will generate only 6 as score.
+
+Write prompt —> get agent response —> grader( code based or model based)  or eval pipeline
+
+Prompt engineering comes after prompt evaluation, it like tweaking our prompt to get desired output or better response.
+
+
+
+Prompt Engineering :
+
+Being clear and direct—>
+	The first line of your prompt is the most important part of your entire request. This is where you set the stage for everything that follows, and getting it right can dramatically improve your results.
+
+Being clear means, write prompt with clear sentenses and thoughts. Don’t write clustered, non clear thoughts.—>
+	
+	Don’t make story.
+
+Being "direct" focuses on how you structure your request:—>
+* Use instructions, not questions
+* Start with direct action verbs like "Write," "Create," or "Generate”.
+
+
+Being specific means :—>
+	Give claude directions, steer it, write prompt in more detail in points. Write guidelines.
+
+Types of guidlines.
+
+Output Quality Guidelines :
+
+The first type focuses on listing qualities that your output should have. These guidelines help you control:
+* Length of the response
+* Structure and format
+* Specific attributes or elements to include
+* Tone or style requirements
+For example, you might specify that a story should be under 1,000 words, include a clear action that reveals the character's talent, and feature at least one supporting character.
+
+
+Process Steps guidelines :
+
+The second type provides specific steps for Claude to follow. This approach is particularly useful when you want Claude to think through a problem systematically or consider multiple perspectives before arriving at a final answer.
+Instead of jumping straight to writing, you might ask Claude to:
+1. Brainstorm three talents that would create dramatic tension
+2. Pick the most interesting talent
+3. Outline a pivotal scene that reveals the talent
+4. Brainstorm supporting character types that could increase the impact.
+
+
+
+Prompt structuring with XML tags :
+Use XML tags inside f string (f”””  “””) to structure your prompts, you can create any tag name by urself just make sure it describe the content inside it.
+
+
+
+Give examples to claude to understand output format, specially for things like sarcasm.
+
+One shot : one sample example
+Multi shot : multiple sample examples
+
+use xml tags.
+
+<sample_input> </sample_input>
+
+<sample_output> </sample_output>
+	
+	Writing why just after sample output closing tag increases more accuracy of claude, that why this sample output is best.
+
+
+
+Tool funcitons—>
+
+
+Tools are used by claude to access external data which is not available to it.
+
+When claude wants to use tool it returns a response with text and tooluse block, it tells tool it wants to access and also input that claude wants to pass to that input.
+
+We pass tools schema to claude in message request so it can decide which one to run and how. Maybe MCP server have different ways.
+
+How toolResult are passed to claude??
+
+server pass toolResult to claude as tool_use_id and result or content. Claude gives each tool_use a Id so It can map the result of each tool.Coder sends answer while matching the tool_use_id.
+
+
+claude response can have = textblock() and toolUseBlock(), these are not function, just claude way to respond data.
+
+Remember we have to always pass all the previous messages with currrent bcoz claude server doesn’t keep the message history.
+
+
+messages.append({
+    "role": "user",
+    "content": [{
+        "type": "tool_result",
+        "tool_use_id": response.content[1].id,	(claude have given id to tool in previous msg of claude)
+        "content": "15:04:22",
+        "is_error": False
+    }]
+})
+
+
+Now making request to claude after we appended our result to messages.
+This will hit claude api.
+
+client.messages.create(
+    model=model,
+    max_tokens=1000,
+    messages=messages,
+    tools=[get_current_datetime_schema]
+)
+
+
+
+TOOL STREAMING—>
+
+When claude passes inputs of tool_use it passes in event as known as input_json event using that we can show that text in stream.
+
+Why delay in response from claude ?
+While generating schema outputs, it try to complete 1 top-level key-value pair and then validate json then sends response to server.
+To avoid this delay we can use fine grained tool calling :on which removes json schema validation and sends result fast as possible.
+fine_grained = true.
+	disadvantage: We have to now do error handeling by ourselves. 
+
+Text-editor tool:
+	Claude server have inbuilt text edior to generate schema and text from his side but, to do CRUD operations on our local files or servers, claude need permission and tool to perform that. We developer provide those to claude by creating those functionalities and pass tools to claude to do file operations locally.
+
+
+
+
+RAG
+Retrieval Augmented Generation (RAG) is a technique that helps you work with large documents that are too big to fit into a single prompt. Instead of cramming everything into one massive prompt, RAG breaks documents into chunks and only includes the most relevant pieces when answering questions.
+
+
+RAG pipeline:
+
+Chunking:
+Size based chunking—>
+
+	Size-based chunking is the simplest approach - you divide your text into strings of equal length. If you have a 325-character document, you might split it 	into three chunks of roughly 108 characters each.
+
+
+Structure based chunking—>
+	Structure-based chunking divides text based on the document's natural structure - headers, paragraphs, and sections. This works great when you have well-formatted documents like Markdown files.
+
+Semantic based chunking (sentence or section)—>
+	A practical middle ground is chunking by sentences. You split the text into individual sentences using regular expressions, then group them into chunks with optional overlap: like sentence breaking.
+
+Choosing Your Strategy
+Your choice depends entirely on your use case and document guarantees:
+* Structure-based: Best results when you control document formatting (like internal company reports)
+* Sentence-based: Good middle ground for most text documents
+* Size-based: Most reliable fallback that works with any content type, including code
+Size-based chunking with overlap is often the go-to choice in production because it's simple, reliable, and works with any document type. While it may not give perfect results, it consistently produces reasonable chunks that won't break your pipeline.
+
+
+Embedding rating can go from -1 to 1, Anthropic doesn’t provide a way to generate embedding for text but, VoyageAI provides we can integrate them in our application.
+
+
+RAG FLow—>
+
+Chunking —> Embedding (gives magnitude of each word related to topic -1 to 1) —> normalization (adjusting magnitude of embeddings to 0-1) —> store chunks and their magnitudes —> user queries ( then do chunking —> normalization  on his query) —> search on vector database (which internally uses cosine simillarity) and return the answer.
+
+	Corrected RAG flow
+1. Chunking (indexing time): Split your documents into passages, usually 200-500 tokens, often with some overlap so context isn’t cut mid-thought.
+2. Embedding: An embedding model turns each chunk into a single vector (hundreds or thousands of dimensions). It isn’t a magnitude per word relating to a topic. Each dimension has no human-readable meaning on its own; the meaning lives in the vector’s overall direction. Values can be negative or positive, but they aren’t confined to -1 to 1 unless normalized.
+3. Normalization: Scale each vector to unit length (L2 norm = 1). This doesn’t squash values into 0-1. Individual components can still be negative. What it does is make cosine similarity equal to a simple dot product. Many embedding models already return normalized vectors.
+4. Store: Save the chunk text, its vector, and metadata (source, page, etc.) in a vector database.
+5. Query time: The user’s question is embedded with the same model (not chunked, since it’s short) and normalized the same way.
+6. Retrieval: The vector DB finds the top-k nearest chunks, usually via cosine similarity or dot product, often using an approximate index like HNSW for speed.
+7. Generation (the missing step): The retrieved chunks are inserted into the LLM’s prompt along with the question, and the LLM writes the answer. The vector database only returns relevant chunks, not answers.
+
+How does cosine similarity work?
+Cosine similarity measures the angle between two vectors.
+\[ \text{cosine similarity}= \frac{\mathbf{A}\cdot\mathbf{B}} {\|\mathbf{A}\|\|\mathbf{B}\|} \]
+Its value ranges from -1 to 1 mathematically.
+
+- Close to 1: vectors point in similar directions.
+- Close to 0: vectors are approximately perpendicular.
+- Close to -1: vectors point in opposite directions.
+
+
+Chunk —> embeddings in vector database
+
+
+BM25 lexical search—> Best Match 25
+	
+	We can’t rely only on magnitude of chunks to match with query from database, some chunks may have same magnitude but different meaning, For, that we use BM25 lexical search parallaly and then in result we merge the result of both searches BM25 and vector search.
+
+This process is also known as Mutli-indexed RAG pipeline.
+We are storing each chunks on 2 databases, vector and BM25 according to chunks.
+
+	How we merge results both databases?
+
+	Ans —> Reciprocal rank fusion
+			We get the ranks of each chunks from both table and create a new table, calculate rank by some formuale and then we select chunk with 						highest value.
+
+			Reciprocal will keep lower rank to lower its 1 / rank from vector + 1 / rank from Bm25
+
+
+
+
+FEATURES OF CLAUDE:
+
+Extended thinking : claude takes extra time and token and think deeply on user query then steps to solve it. We use this when response is not accurate after doing prompt engineering like tweaking and all.
+
+When it is enabled claude adds new block to response know as thinking block and inside it claude puts all of its thinking test and send back to user.
+It also send token in signature field, using this claude check is developer have changed its thinking or not.
+It also returns redacted data which is content but encrypted, not for user or developer.
+In Claude, redacted means some information has been hidden, removed, or made unreadable.
+
+
+
+Image block for image:
+
+token = (height * width ) / 750
+
+
+Citations:
+	citations:{enabled:True}	in message api to get citations, for outer links it will give in citationPageLocation() block or if same document then it will give citationCharLocation() block
+
+
+Prompt caching is technique to store the result of prompt in temporary storage to reuse the result in the future in conversations, it reduces radomness, toke cost, latency.
+
+Prompt cache lives for 1 hour.
+
+cache_control:{ 	“type”:”empheral” 	}		in message api.
+
+
+If there are 4 messages and u cache on 5th message then all work till message 5 will be cached.
+If u cache tools then it will not cache system-prompts and user messages. If u cache message then tools,messages and system proompts all will be cached.
+
+In a session we can only add upto 4 cache breakpoints.
+
+For a caching we need atleast 1024 tokens means content should be atleast 1024 tokens long.
+
+With Anthropic’s prompt caching, the "ephemeral" cache type lasts 5 minutes by default.
+* Refreshed on use: Each time the cached prefix is read, the 5-minute timer resets at no extra cost. A prompt you hit at least every 5 minutes stays cached.
+* 1-hour option: You can request a longer lifetime with "cache_control": {"type": "ephemeral", "ttl": "1h"}. Writing to the 1-hour cache costs more than the 5-minute one.
+* Pricing: Cache reads are much cheaper than normal input tokens, and cache writes cost somewhat more than normal input.
+* Exact match required: The cached prefix must be identical (tools, system prompt, and messages up to the breakpoint), or you get a cache miss.
+
+Caching order : list of tools > system prompts > list of messages.
+				So even 1 chracter from any one tool schema change then that cache will be invalid. system_prompt and messages have less priority and they are always read from cache first and they are re-cached if list of tools don’t change but they change.
+
+—>
+{type:container_upload,
+“file_id”:”file_id_retuenderd_by_claude_which_we_uploaded_on_it}
+
+inside message api
+
+What is a key limitation of Claude's Code Execution tool?
+ It can only run JavaScript code
+ It has no network access and runs in an isolated Docker container
+
+* No internet access: Code runs in a sandboxed container with outbound network access disabled. It can’t call external APIs, download files, or pip install from the internet, so you’d pass in any data it needs through the Files API or the conversation.
+* Isolated and resource-limited: The container has capped CPU, memory, and disk. Containers also expire after a period, so you can’t rely on long-term state unless you reuse the same container within its lifetime.
+
+
+
+
+MCP Server -:
+It is same as tools but, we don’t have to own and maintain tools and schema to connect to other existing app for data.
+
+Too many mistakes.
+
+
+Workflows: When we know the steps to do that task and want claude to follow those steps strictly. Use agents when u don’t know step, they will figure out steps.
+
+Parallelization workflow: breaking bigger task in smaller subtasks and then sending all subtasks to claude at once parallely.
+Easy to validate all subtasks result and easy to add new tasks.
+
+Chaining workflows: Sometimes breaking a task into steps and then doing each steps one by one is better, Bcoz of this claude can focus on each step at a time and give better results.
+
+
+Routing workflows: Asking claude to categorize the task in some way. This is good when we have different workflows for different categories which have different tools, tools schema and system prompt.
+
+
+
+You're building an agent with tools. Which approach will give Claude the most flexibility to handle unexpected requests?
+
+1. Give Claude only one powerful tool
+
+2. Provide very specific tools like "write_python_function" and "debug_code"
+
+3. Provide abstract tools like "read_file", "write_file", and "run_command"
+
+	
+“You’re building an agent with tools” means you’re creating a program where Claude doesn’t only chat but can also take actions. The “tools” are functions you give it (read a file, run a command, search the web) that it can call to get things done.
+“Most flexibility to handle unexpected requests” means: when a user asks for something you didn’t plan for, which design lets Claude still figure out a way to do it?
+
+Option 3: Abstract, Composable tools like read_file, write_file, and run_command.
+Why it wins:
+* Small, general-purpose tools can be combined in ways you never anticipated. An unexpected request like “find all TODOs, group them by module, and write a summary” can be handled by chaining the same few primitives.
+* The model decides how to use the tools, rather than you hard-coding every workflow. That’s where the flexibility comes from.
+* It’s roughly how Claude Code works: a handful of general tools (read, write/edit, bash, search) cover a huge range of task
+
+
+
+You want Claude to write a report, then check if it's good enough, and improve it if needed. What pattern are you using?
+ Chaining workflow
+ Evaluator-Optimizer pattern
+No, it isn’t only for workflows. It’s a general pattern, and “workflow” is just where it’s most often named (for example, in Anthropic’s “Building effective agents” guide, where it appears as one of the workflow patterns).
+
+
+
+
+
+Claude responds to your request with both explanatory text and a tool use block. What type of message structure is this?
+
+An error message that needs to be fixed
+
+A multi-block message with different content types
+
+
+
+
+
+
+
+ 
