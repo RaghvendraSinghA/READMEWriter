@@ -1,0 +1,26 @@
+HTTP—>
+
+HTTP tells you how the request and response are communicated.
+
+GET /cards/123
+
+It defines things like:
+* GET → what kind of request
+* /cards/123 → where to request
+* 200 OK → status of the response
+* Content-Type → format of the response
+So HTTP doesn't decide what /cards/123 should mean. It provides the communication rules.
+
+
+REST—>
+
+REST gives principles for how to structure your API around your resources/data using HTTP methods like GET,POST,PUT methods.
+
+GET    /cards       → retrieve cards
+GET    /cards/123   → retrieve card 123
+POST   /cards       → create a card
+PUT    /cards/123   → update card 123
+DELETE /cards/123   → delete card 123
+
+So:
+HTTP = how the request/response works. REST = how you organize your API/resources using HTTP.
